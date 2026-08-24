@@ -6,6 +6,7 @@ export const weapons: Weapon[] = [
     name: { en: "Katana / Wakizashi", pt: "Katana / Wakizashi", es: "Katana / Wakizashi" },
     type: { en: "Katana", pt: "Katana", es: "Katana" },
     weight: 10,
+    icon: "/assets/weapons/katana.svg",
     contentPack: "vanilla",
   },
   {
@@ -13,6 +14,7 @@ export const weapons: Weapon[] = [
     name: { en: "Nodachi", pt: "Nodachi", es: "Nodachi" },
     type: { en: "Katana", pt: "Katana", es: "Katana" },
     weight: 8,
+    icon: "/assets/weapons/katana.svg",
     contentPack: "vanilla",
   },
   {
@@ -20,6 +22,7 @@ export const weapons: Weapon[] = [
     name: { en: "Foreign Sabre / Desert Sabre", pt: "Sabre Estrangeiro / Sabre do Deserto", es: "Sable Extranjero / Sable del Desierto" },
     type: { en: "Saber", pt: "Sabre", es: "Sable" },
     weight: 10,
+    icon: "/assets/weapons/sabre.svg",
     contentPack: "vanilla",
   },
   {
@@ -28,6 +31,7 @@ export const weapons: Weapon[] = [
     type: { en: "Hacker", pt: "Cutelo (Hacker)", es: "Hacker" },
     weight: 6,
     tags: ["holy_weapon"],
+    icon: "/assets/weapons/hacker.svg",
     contentPack: "vanilla",
   },
   {
@@ -35,6 +39,7 @@ export const weapons: Weapon[] = [
     name: { en: "Combat Cleaver / Flesh Cleaver", pt: "Cutelo de Combate / Cutelo de Carne", es: "Hacha de Combate / Hacha de Carne" },
     type: { en: "Hacker", pt: "Cutelo (Hacker)", es: "Hacker" },
     weight: 8,
+    icon: "/assets/weapons/hacker.svg",
     contentPack: "vanilla",
   },
   {
@@ -43,6 +48,7 @@ export const weapons: Weapon[] = [
     type: { en: "Heavy", pt: "Arma Pesada", es: "Arma Pesada" },
     weight: 5,
     incompatibleTags: ["solo"],
+    icon: "/assets/weapons/heavy.svg",
     contentPack: "vanilla",
   },
   {
@@ -50,6 +56,7 @@ export const weapons: Weapon[] = [
     name: { en: "Falling Sun", pt: "Falling Sun", es: "Sol Caído" },
     type: { en: "Heavy", pt: "Arma Pesada", es: "Arma Pesada" },
     weight: 6,
+    icon: "/assets/weapons/heavy.svg",
     contentPack: "vanilla",
   },
   {
@@ -57,6 +64,7 @@ export const weapons: Weapon[] = [
     name: { en: "Jitte / Heavy Jitte", pt: "Jitte / Jitte Pesado", es: "Jitte / Jitte Pesado" },
     type: { en: "Blunt", pt: "Contundente", es: "Contundente" },
     weight: 7,
+    icon: "/assets/weapons/blunt.svg",
     contentPack: "vanilla",
   },
   {
@@ -64,6 +72,7 @@ export const weapons: Weapon[] = [
     name: { en: "Naginata / Polearm", pt: "Naginata / Arma de Haste", es: "Naginata / Arma de Asta" },
     type: { en: "Polearm", pt: "Arma de Haste", es: "Arma de Asta" },
     weight: 9,
+    icon: "/assets/weapons/polearm.svg",
     contentPack: "vanilla",
   },
   {
@@ -71,6 +80,7 @@ export const weapons: Weapon[] = [
     name: { en: "Ranger / Oldworld Crossbow", pt: "Ranger / Besta do Velho Mundo", es: "Ranger / Ballesta del Viejo Mundo" },
     type: { en: "Crossbow", pt: "Besta", es: "Ballesta" },
     weight: 8,
+    icon: "/assets/weapons/crossbow.svg",
     contentPack: "vanilla",
   },
   {
@@ -79,6 +89,7 @@ export const weapons: Weapon[] = [
     type: { en: "Martial Arts", pt: "Artes Marciais", es: "Artes Marciales" },
     weight: 7,
     tags: ["martial_artist"],
+    icon: "/assets/weapons/martial-arts.svg",
     contentPack: "vanilla",
   },
 ];

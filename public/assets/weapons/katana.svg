@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Sketchy curved blade -->
+  <path d="M14 50 C 20 40, 36 24, 52 12" stroke-width="4" />
+  <path d="M16 48 C 22 38, 38 22, 54 10" stroke-width="1.5" />
+  <!-- Tsuba (guard) -->
+  <path d="M12 44 L20 52" stroke-width="6" />
+  <!-- Tsuka (handle) -->
+  <path d="M10 52 L6 56" stroke-width="4" />
+</svg>

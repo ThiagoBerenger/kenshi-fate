@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Shadow Mask/Eye -->
+  <path d="M12 32 C 20 22, 44 22, 52 32 C 44 42, 20 42, 12 32 Z" stroke-width="3.5" />
+  <!-- Slit pupil -->
+  <path d="M32 26 L32 38" stroke-width="4" stroke-linecap="square" />
+  <!-- Crossed Daggers behind the eye -->
+  <path d="M10 14 L24 24" stroke-width="2.5" />
+  <path d="M54 14 L40 24" stroke-width="2.5" />
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Spiked Club / Mace -->
+  <path d="M14 50 L48 16" stroke-width="3" />
+  <!-- Thick spiked head -->
+  <path d="M38 26 L52 12 C 54 14, 52 20, 44 28 Z" fill="currentColor" fill-opacity="0.2" />
+  <path d="M38 26 L52 12 C 54 14, 52 20, 44 28 Z" stroke-width="4" />
+  <!-- Spikes -->
+  <path d="M48 16 L54 12" stroke-width="2" />
+  <path d="M44 20 L50 18" stroke-width="2" />
+  <path d="M42 24 L46 26" stroke-width="2" />
+  <path d="M40 18 L42 12" stroke-width="2" />
+  <!-- Handle wraps -->
+  <path d="M18 46 L14 50" stroke-width="5" />
+  <path d="M14 50 L10 54" stroke-width="4" />
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Central stand -->
+  <path d="M32 12 L32 52" stroke-width="4.5" />
+  <path d="M20 52 L44 52" stroke-width="6" />
+  <!-- Balance beam -->
+  <path d="M12 22 L52 22" stroke-width="3.5" />
+  <!-- Hanging pans -->
+  <path d="M12 22 L8 36 L16 36 Z" fill="currentColor" fill-opacity="0.2" />
+  <path d="M52 22 L48 36 L56 36 Z" fill="currentColor" fill-opacity="0.2" />
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Long spear shaft -->
+  <path d="M8 56 L46 18" stroke-width="2.5" />
+  <!-- Cross bar (guards) -->
+  <path d="M43 21 L47 17" stroke-width="4" />
+  <!-- Glaive / Spear Head -->
+  <path d="M44 20 L56 8 L50 14 Z" fill="currentColor" />
+  <path d="M44 20 L56 8 C 50 12, 48 16, 44 20" stroke-width="3" />
+  <!-- Decorative ribbon or wraps -->
+  <path d="M41 23 C 39 25, 41 27, 39 29" stroke-width="1.5" />
+</svg>

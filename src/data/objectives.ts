@@ -37,6 +37,7 @@ export const objectives: Objective[] = [
     },
     weight: 8,
     difficultyLevels: [0, 1, 2],
+    targetLocationId: "dust_king_tower",
     contentPack: "vanilla",
   },
   {
@@ -73,6 +74,7 @@ export const objectives: Objective[] = [
     },
     weight: 8,
     difficultyLevels: [0, 1, 2, 3],
+    targetLocationId: "black_desert_city",
     contentPack: "vanilla",
   },
   {
@@ -86,6 +88,7 @@ export const objectives: Objective[] = [
     weight: 9,
     difficultyLevels: [0, 1, 2, 3],
     incompatibleTags: ["solo", "holy_nation_fanatic"],
+    targetLocationId: "mongrel",
     contentPack: "vanilla",
   },
   {
@@ -98,6 +101,7 @@ export const objectives: Objective[] = [
     },
     weight: 7,
     difficultyLevels: [0, 1, 2, 3],
+    targetLocationId: "rebirth",
     contentPack: "vanilla",
   },
   {
@@ -110,6 +114,7 @@ export const objectives: Objective[] = [
     },
     weight: 7,
     difficultyLevels: [1, 2, 3],
+    targetLocationId: "mongrel",
     contentPack: "vanilla",
   },
   {
@@ -139,6 +144,7 @@ export const objectives: Objective[] = [
     difficultyLevels: [0, 1, 2, 3],
     isFinal: true,
     incompatibleTags: ["holy_nation_fanatic", "holy_nation_associated"],
+    targetLocationId: "blister_hill",
     contentPack: "vanilla",
   },
   {
@@ -153,6 +159,7 @@ export const objectives: Objective[] = [
     difficultyLevels: [0, 1, 2, 3],
     isFinal: true,
     incompatibleTags: ["empire_citizen"],
+    targetLocationId: "heft",
     contentPack: "vanilla",
   },
   {
@@ -166,6 +173,7 @@ export const objectives: Objective[] = [
     weight: 8,
     difficultyLevels: [1, 2, 3],
     isFinal: true,
+    targetLocationId: "ashlands",
     contentPack: "vanilla",
   },
   {
@@ -179,6 +187,7 @@ export const objectives: Objective[] = [
     weight: 9,
     difficultyLevels: [0, 1, 2, 3],
     isFinal: true,
+    targetLocationId: "arach",
     contentPack: "vanilla",
   },
   {
@@ -194,6 +203,7 @@ export const objectives: Objective[] = [
     isFinal: true,
     tags: ["anti_slavery"],
     incompatibleTags: ["holy_nation_fanatic"],
+    targetLocationId: "rebirth",
     contentPack: "vanilla",
   },
   {
@@ -208,6 +218,7 @@ export const objectives: Objective[] = [
     difficultyLevels: [1, 2, 3],
     isFinal: true,
     incompatibleTags: ["skeleton_loyalist"],
+    targetLocationId: "ashlands",
     contentPack: "vanilla",
   },
   {
@@ -221,6 +232,7 @@ export const objectives: Objective[] = [
     weight: 8,
     difficultyLevels: [0, 1, 2, 3],
     isFinal: true,
+    targetLocationId: "worlds_end",
     contentPack: "vanilla",
   },
   {
@@ -235,6 +247,7 @@ export const objectives: Objective[] = [
     difficultyLevels: [2, 3],
     isFinal: true,
     incompatibleTags: ["base_forbidden", "solo"],
+    targetLocationId: "ashlands",
     contentPack: "vanilla",
   },
   {
@@ -249,6 +262,7 @@ export const objectives: Objective[] = [
     difficultyLevels: [1, 2, 3],
     isFinal: true,
     incompatibleTags: ["base_forbidden", "holy_nation_fanatic", "bounties_only"],
+    targetLocationId: "shark",
     contentPack: "vanilla",
   },
   {

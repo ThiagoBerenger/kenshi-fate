@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import type { PlaythroughRun, Language } from "../engine/types";
 import { uiTranslations } from "../data/uiTranslations";
+import { Map } from "./Map";
 
 interface RunCardProps {
   run: PlaythroughRun;
@@ -159,20 +160,30 @@ export const RunCard: React.FC<RunCardProps> = ({ run, lang, onGenerateNew }) =>
                   <Sword size={16} className="inline mr-2 -mt-1" />
                   {t.combat}
                 </h3>
-                <div className="pl-2 border-l border-sand-dark/40 grid grid-cols-2 gap-4">
-                  <div>
-                    <span className="font-bold text-xs uppercase text-stone-600 block">{t.primaryWeapon}</span>
-                    <span className="font-semibold text-text-dark">{run.weapon.name[lang]}</span>
-                    <span className="text-xxs uppercase bg-stone-300/60 px-1 py-0.5 rounded block w-max mt-1 text-stone-700 font-monospace">
-                      Class: {run.weapon.type[lang]}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="font-bold text-xs uppercase text-stone-600 block">{t.armorClass}</span>
-                    <span className="font-semibold text-text-dark">{run.armor.name[lang]}</span>
-                    <span className="text-xxs uppercase bg-stone-300/60 px-1 py-0.5 rounded block w-max mt-1 text-stone-700 font-monospace">
-                      Weight: {run.armor.type[lang]}
-                    </span>
+                <div className="pl-2 border-l border-sand-dark/40 flex items-start gap-4">
+                  {run.weapon.icon && (
+                    <img 
+                      src={run.weapon.icon} 
+                      alt="" 
+                      className="w-10 h-10 object-contain"
+                      style={{ width: "40px", height: "40px", filter: "brightness(0.12)", opacity: "0.85" }} 
+                    />
+                  )}
+                  <div className="grid grid-cols-2 gap-4 flex-grow">
+                    <div>
+                      <span className="font-bold text-xs uppercase text-stone-600 block">{t.primaryWeapon}</span>
+                      <span className="font-semibold text-text-dark">{run.weapon.name[lang]}</span>
+                      <span className="text-xxs uppercase bg-stone-300/60 px-1 py-0.5 rounded block w-max mt-1 text-stone-700 font-monospace">
+                        Class: {run.weapon.type[lang]}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="font-bold text-xs uppercase text-stone-600 block">{t.armorClass}</span>
+                      <span className="font-semibold text-text-dark">{run.armor.name[lang]}</span>
+                      <span className="text-xxs uppercase bg-stone-300/60 px-1 py-0.5 rounded block w-max mt-1 text-stone-700 font-monospace">
+                        Weight: {run.armor.type[lang]}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -183,16 +194,38 @@ export const RunCard: React.FC<RunCardProps> = ({ run, lang, onGenerateNew }) =>
                   <Shield size={16} className="inline mr-2 -mt-1" />
                   {t.politics}
                 </h3>
-                <div className="pl-2 border-l border-sand-dark/40 flex flex-col gap-3">
-                  <div>
-                    <span className="font-bold text-xs uppercase text-green-700 block">{t.alliedFaction}</span>
-                    <span className="font-semibold text-text-dark">{run.alliedFaction.name[lang]}</span>
-                    <p className="text-xs text-stone-600 mt-0.5">{run.alliedFaction.description[lang]}</p>
+                <div className="pl-2 border-l border-sand-dark/40 flex flex-col gap-4">
+                  {/* Allied Faction */}
+                  <div className="flex items-start gap-3">
+                    {run.alliedFaction.icon && (
+                      <img 
+                        src={run.alliedFaction.icon} 
+                        alt="" 
+                        className="w-10 h-10 object-contain"
+                        style={{ width: "40px", height: "40px", filter: "brightness(0.12)", opacity: "0.85" }} 
+                      />
+                    )}
+                    <div>
+                      <span className="font-bold text-xs uppercase text-green-700 block">{t.alliedFactionHeader}</span>
+                      <span className="font-semibold text-text-dark">{run.alliedFaction.name[lang]}</span>
+                      <p className="text-xs text-stone-600 mt-0.5 leading-tight">{run.alliedFaction.description[lang]}</p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-bold text-xs uppercase text-red block">{t.hostileFaction}</span>
-                    <span className="font-semibold text-text-dark">{run.enemyFaction.name[lang]}</span>
-                    <p className="text-xs text-stone-600 mt-0.5">{run.enemyFaction.description[lang]}</p>
+                  {/* Enemy Faction */}
+                  <div className="flex items-start gap-3">
+                    {run.enemyFaction.icon && (
+                      <img 
+                        src={run.enemyFaction.icon} 
+                        alt="" 
+                        className="w-10 h-10 object-contain"
+                        style={{ width: "40px", height: "40px", filter: "brightness(0.12)", opacity: "0.85" }} 
+                      />
+                    )}
+                    <div>
+                      <span className="font-bold text-xs uppercase text-red block">{t.enemyFactionHeader}</span>
+                      <span className="font-semibold text-text-dark">{run.enemyFaction.name[lang]}</span>
+                      <p className="text-xs text-stone-600 mt-0.5 leading-tight">{run.enemyFaction.description[lang]}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -287,6 +320,13 @@ export const RunCard: React.FC<RunCardProps> = ({ run, lang, onGenerateNew }) =>
             </div>
 
           </div>
+
+          {/* Map Journey Section */}
+          {(run.start.startingLocationId || run.finalObjective.targetLocationId) && (
+            <div className="mt-8 pt-6 border-t border-dashed border-sand-dark/40">
+              <Map run={run} lang={lang} />
+            </div>
+          )}
 
           {/* Stamped Date or Seed Identifier */}
           <div className="text-right border-t border-dashed border-sand-dark pt-4 mt-8 flex justify-between items-center text-xxs text-stone-500 font-monospace uppercase">

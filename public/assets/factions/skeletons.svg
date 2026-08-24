@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Metallic, blocky skull outline -->
+  <path d="M18 16 L46 16 L48 36 L38 40 L38 48 L26 48 L26 40 L16 36 Z" stroke-width="4" fill="currentColor" fill-opacity="0.1" />
+  <!-- Square eyes -->
+  <rect x="22" y="24" width="6" height="6" fill="currentColor" stroke="none" />
+  <rect x="36" y="24" width="6" height="6" fill="currentColor" stroke="none" />
+  <!-- Teeth/Grille lines -->
+  <path d="M30 42 L30 48" stroke-width="2" />
+  <path d="M34 42 L34 48" stroke-width="2" />
+</svg>

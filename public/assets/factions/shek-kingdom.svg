@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Spiked shield -->
+  <path d="M14 16 L32 8 L50 16 L44 48 L32 56 L20 48 Z" stroke-width="3" fill="currentColor" fill-opacity="0.1" />
+  <!-- Horn outlines -->
+  <path d="M14 16 C 8 24, 8 36, 16 42" stroke-width="4.5" />
+  <path d="M50 16 C 56 24, 56 36, 48 42" stroke-width="4.5" />
+  <!-- Central cross spikes -->
+  <path d="M32 20 L32 44" stroke-width="3" />
+  <path d="M22 32 L42 32" stroke-width="3" />
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Curved sabre blade with a wider tip -->
+  <path d="M18 46 C 24 38, 42 20, 50 10 C 46 16, 30 32, 22 42 Z" fill="currentColor" stroke="none" />
+  <path d="M18 46 C 24 38, 42 20, 50 10" />
+  <!-- D-guard -->
+  <path d="M18 46 C 14 44, 10 48, 12 52 C 14 56, 18 54, 22 50 Z" />
+  <!-- Handle -->
+  <path d="M16 48 L10 54" stroke-width="4" />
+</svg>

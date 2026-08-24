@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Imperial Crest: stylized crown/scales representing money and empire -->
+  <path d="M12 48 L16 20 L32 30 L48 20 L52 48 Z" stroke-width="3" fill="currentColor" fill-opacity="0.1" />
+  <!-- Crown peaks -->
+  <circle cx="16" cy="20" r="3" fill="currentColor" />
+  <circle cx="32" cy="30" r="3" fill="currentColor" />
+  <circle cx="48" cy="20" r="3" fill="currentColor" />
+  <!-- Center line -->
+  <path d="M32 30 L32 48" stroke-width="2" />
+  <!-- Base platform -->
+  <path d="M8 48 L56 48" stroke-width="4" />
+</svg>

@@ -20,14 +20,18 @@ export interface Start extends TaggedItem {
   description: LocalizedString;
   startingSquad: LocalizedString;
   allowedRaces?: string[]; // If present, main character must be one of these
+  startingLocationId?: string;
 }
 
 export interface Faction extends TaggedItem {
   description: LocalizedString;
+  icon?: string;
+  shortName?: LocalizedString;
 }
 
 export interface Weapon extends TaggedItem {
   type: LocalizedString; // Katana, Saber, Hacker, Heavy, Blunt, Polearm, Crossbow
+  icon?: string;
 }
 
 export interface Armor extends TaggedItem {
@@ -58,6 +62,7 @@ export interface Objective extends TaggedItem {
   description: LocalizedString;
   difficultyLevels: DifficultyLevel[];
   isFinal?: boolean;
+  targetLocationId?: string;
 }
 
 export interface CustomOptions {

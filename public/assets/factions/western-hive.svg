@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Stylized Hive Pod shape -->
+  <path d="M32 6 C 24 16, 20 30, 32 58 C 44 30, 40 16, 32 6 Z" stroke-width="3.5" fill="currentColor" fill-opacity="0.1" />
+  <!-- Horizontal organic lines -->
+  <path d="M26 20 L38 20" stroke-width="2" />
+  <path d="M24 30 L40 30" stroke-width="2.5" />
+  <path d="M26 40 L38 40" stroke-width="2" />
+  <path d="M29 50 L35 50" stroke-width="1.5" />
+</svg>

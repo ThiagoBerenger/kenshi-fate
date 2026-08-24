@@ -7,10 +7,11 @@ export const starts: Start[] = [
     description: {
       en: "A standard start with 1 character and 1,000 Cats in the Hub.",
       pt: "Um início padrão com 1 personagem e 1.000 Cats no Hub.",
-      es: "Un inicio estándar con 1 personaje y 1,000 Cats en el Hub.",
+      es: "Un inicio estándar con 1 personaje y 1,000 Cats in the Hub.",
     },
     startingSquad: { en: "1 Wanderer", pt: "1 Andarilho", es: "1 Vagabundo" },
     weight: 10,
+    startingLocationId: "the_hub",
     contentPack: "vanilla",
   },
   {
@@ -25,6 +26,7 @@ export const starts: Start[] = [
     weight: 8,
     allowedRaces: ["greenlander", "scorchlander"],
     tags: ["holy_nation_citizen"],
+    startingLocationId: "stack",
     contentPack: "vanilla",
   },
   {
@@ -38,6 +40,7 @@ export const starts: Start[] = [
     startingSquad: { en: "1 Empire Citizen", pt: "1 Cidadão do Império", es: "1 Ciudadano Imperial" },
     weight: 8,
     tags: ["empire_citizen"],
+    startingLocationId: "sho_battai",
     contentPack: "vanilla",
   },
   {
@@ -51,6 +54,7 @@ export const starts: Start[] = [
     startingSquad: { en: "6 Settlers", pt: "6 Colonos", es: "6 Colonos" },
     weight: 5,
     incompatibleTags: ["solo"],
+    startingLocationId: "squin",
     contentPack: "vanilla",
   },
   {
@@ -64,6 +68,7 @@ export const starts: Start[] = [
     startingSquad: { en: "5 Nobodies", pt: "5 Zé Ninguém", es: "5 Personajes" },
     weight: 6,
     incompatibleTags: ["solo"],
+    startingLocationId: "the_hub",
     contentPack: "vanilla",
   },
   {
@@ -76,6 +81,7 @@ export const starts: Start[] = [
     },
     startingSquad: { en: "1 Wanderer, 1 Bonedog", pt: "1 Andarilho, 1 Bonedog", es: "1 Vagabundo, 1 Bonedog" },
     weight: 6,
+    startingLocationId: "sho_battai",
     contentPack: "vanilla",
   },
   {
@@ -89,6 +95,7 @@ export const starts: Start[] = [
     startingSquad: { en: "2 Cannibal Hunters", pt: "2 Caçadores de Canibais", es: "2 Cazadores de Caníbales" },
     weight: 4,
     incompatibleTags: ["solo"],
+    startingLocationId: "worlds_end",
     contentPack: "vanilla",
   },
   {
@@ -102,6 +109,7 @@ export const starts: Start[] = [
     startingSquad: { en: "1 Wanderer (Wanted)", pt: "1 Andarilho (Procurado)", es: "1 Vagabundo (Buscado)" },
     weight: 4,
     tags: ["holy_sword"],
+    startingLocationId: "sho_battai",
     contentPack: "vanilla",
   },
   {
@@ -116,6 +124,7 @@ export const starts: Start[] = [
     weight: 6,
     tags: ["escaped_slaves"],
     incompatibleTags: ["solo"],
+    startingLocationId: "rebirth",
     contentPack: "vanilla",
   },
   {
@@ -131,6 +140,7 @@ export const starts: Start[] = [
     allowedRaces: ["greenlander", "scorchlander", "shek", "hive_worker", "hive_prince"],
     tags: ["torso_start", "requires_prosthetics"],
     incompatibleTags: ["no_prosthetics", "prosthetics_forbidden"],
+    startingLocationId: "sho_battai",
     contentPack: "vanilla",
   },
 ];

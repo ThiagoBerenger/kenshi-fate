@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Giant massive blade (Plank / Falling Sun) -->
+  <path d="M24 44 L54 14 L58 18 L28 48 Z" fill="currentColor" fill-opacity="0.1" />
+  <path d="M24 44 L54 14 L58 18 L28 48 Z" stroke-width="5" />
+  <!-- Weight distribution fuller groove -->
+  <path d="M32 40 L50 22" stroke-width="2" />
+  <!-- Large Crossguard -->
+  <path d="M18 38 L30 50" stroke-width="7" />
+  <!-- Long double-handed handle -->
+  <path d="M22 44 L10 56" stroke-width="4" />
+  <!-- Pommel -->
+  <circle cx="10" cy="56" r="3" fill="currentColor" />
+</svg>

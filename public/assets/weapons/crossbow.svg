@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Main bow limb -->
+  <path d="M12 20 C 24 10, 40 10, 52 20" stroke-width="4" />
+  <!-- String -->
+  <path d="M12 20 L32 38 L52 20" stroke-width="1" />
+  <!-- Stock / Body -->
+  <path d="M32 12 L32 52" stroke-width="5" />
+  <!-- Trigger / Handle details -->
+  <path d="M30 40 L34 40" stroke-width="3" />
+  <path d="M32 44 L28 48" stroke-width="2.5" />
+  <!-- Loaded bolt / arrow -->
+  <path d="M32 18 L32 30" stroke-width="2" stroke-dasharray="2 1" />
+  <path d="M32 14 L30 18 L34 18 Z" fill="currentColor" />
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Spiked Pod -->
+  <path d="M32 6 C 24 16, 20 30, 32 58 C 44 30, 40 16, 32 6 Z" stroke-width="3.5" fill="currentColor" fill-opacity="0.1" />
+  <!-- External spikes -->
+  <path d="M24 22 L16 18" stroke-width="3" />
+  <path d="M40 22 L48 18" stroke-width="3" />
+  <path d="M20 34 L12 34" stroke-width="3" />
+  <path d="M44 34 L52 34" stroke-width="3" />
+  <!-- Center core -->
+  <circle cx="32" cy="30" r="5" fill="currentColor" />
+</svg>
