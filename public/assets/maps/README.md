@@ -1,12 +1,14 @@
 # Kenshi World Map Asset Information
 
 ## Details
-* **Asset Name**: Kenshi World Map (Parchment Art Variant)
-* **Author/Source**: AI-Generated (using Antigravity coding assistant image generation tool) / Community-provided placeholder
-* **Origin URL**: Generated locally within the workspace
-* **License**: MIT / CC0 (Public Domain / Placeholder context)
-* **Modifications**: Initial generation of the stylized sepia parchment desert wasteland map and scaled to WebP format.
+* **Asset Name**: Kenshi Location Map
+* **Exact Filename**: `kenshi-world-map.jpg` (originally `Kenshi_Location_Map.jpg`)
+* **Author/Source**: Kenshi Fandom Wiki contributors
+* **Page Origin**: [Category:Map - Kenshi Wiki](https://kenshi.fandom.com/wiki/Category:Map) / [Map:Location map](https://kenshi.fandom.com/wiki/Map:Location_map)
+* **Direct URL**: `https://static.wikia.nocookie.net/kenshi/images/a/ae/Kenshi_Location_Map.jpg/revision/latest?cb=20180918033815`
+* **License**: Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+* **Modifications**: Downloaded and saved locally without quality reductions to preserve clarity.
 * **Access Date**: 2026-08-24
 
-## Note on replacement
-To replace this map with a high-fidelity community-produced map (e.g. licensed under CC BY-SA 3.0/4.0), overwrite the file `kenshi-world-map.webp` in this directory and update this README to reflect the author, source, and terms of the new license.
+## Usage & Terms
+This asset is community-provided content. According to Fandom licensing terms, it is distributed under CC BY-SA 3.0. Please keep this credit documentation and the discrete attribution notice on the UI.

@@ -196,7 +196,7 @@ export const Map: React.FC<MapProps> = ({ run, lang }) => {
         <div className="relative w-full" onClick={handleMapClick}>
           {/* Main Map Background */}
           <img 
-            src="/assets/maps/kenshi-world-map.webp" 
+            src="/assets/maps/kenshi-world-map.jpg" 
             alt="Kenshi World Map" 
             className="w-full h-auto block"
             loading="lazy"
@@ -288,7 +288,7 @@ export const Map: React.FC<MapProps> = ({ run, lang }) => {
 
       {/* Map Attribution */}
       <div className="flex justify-between items-center px-1 text-[10px] font-monospace text-stone-500">
-        <span>Map source / credits: Community Map Placeholder</span>
+        <span>Map source / credits: Kenshi Location Map (Kenshi Wiki / Fandom, CC BY-SA 3.0)</span>
         {import.meta.env.DEV && (
           <span className="text-rust font-bold">(Dev Mode: Click map for coordinates)</span>
         )}
