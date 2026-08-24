@@ -12,7 +12,7 @@ import type {
   LocalizedString,
   Language,
 } from "./types";
-import { getSeededRandom } from "./seededRandom";
+import { getSeededRandom, serializeOptions, deserializeOptions } from "./seededRandom";
 import { isCompatible, registerItem } from "./compatibility";
 import {
   races,
@@ -188,14 +188,34 @@ function compileTitle(
  * Main playthrough generation engine.
  */
 export function generateRun(seed: string, customOptions?: CustomOptions): PlaythroughRun {
-  const rand = getSeededRandom(seed);
+  // Parse options from seed if present (e.g. KF-123456-c-d:1.ra:shek)
+  const dashCIndex = seed.indexOf("-c-");
+  let baseSeed = seed;
+  let seedOptions: CustomOptions = {};
+  if (dashCIndex !== -1) {
+    baseSeed = seed.slice(0, dashCIndex);
+    seedOptions = deserializeOptions(seed.slice(dashCIndex + 3));
+  }
+
+  // Merge customOptions (passed directly, e.g. from Customizer) with seedOptions (parsed from URL)
+  // Options passed directly have priority
+  const options: CustomOptions = {
+    difficulty: customOptions?.difficulty !== undefined ? customOptions.difficulty : (seedOptions.difficulty !== undefined ? seedOptions.difficulty : "random"),
+    race: customOptions?.race !== undefined ? customOptions.race : (seedOptions.race !== undefined ? seedOptions.race : "random"),
+    start: customOptions?.start !== undefined ? customOptions.start : (seedOptions.start !== undefined ? seedOptions.start : "random"),
+    baseBuilding: customOptions?.baseBuilding !== undefined ? customOptions.baseBuilding : (seedOptions.baseBuilding !== undefined ? seedOptions.baseBuilding : "random"),
+    recruitment: customOptions?.recruitment !== undefined ? customOptions.recruitment : (seedOptions.recruitment !== undefined ? seedOptions.recruitment : "random"),
+    ironman: customOptions?.ironman !== undefined ? customOptions.ironman : (seedOptions.ironman !== undefined ? seedOptions.ironman : "random"),
+  };
+
+  const rand = getSeededRandom(baseSeed);
   const activeTags = new Set<string>();
   const accumulatedIncompatibilities = new Set<string>();
 
   // 1. Difficulty Level
   let difficultyLevel: DifficultyLevel;
-  if (customOptions?.difficulty !== undefined && customOptions.difficulty !== "random") {
-    difficultyLevel = customOptions.difficulty;
+  if (options.difficulty !== undefined && options.difficulty !== "random") {
+    difficultyLevel = options.difficulty;
   } else {
     const diffRand = rand();
     if (diffRand < 0.3) difficultyLevel = 0;
@@ -208,8 +228,8 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
 
   // 2. Start Selection
   let start: Start;
-  if (customOptions?.start && customOptions.start !== "random") {
-    start = starts.find((s) => s.id === customOptions.start) || starts[0];
+  if (options.start && options.start !== "random") {
+    start = starts.find((s) => s.id === options.start) || starts[0];
   } else {
     start = selectWeighted(starts, rand, activeTags, accumulatedIncompatibilities);
   }
@@ -217,8 +237,8 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
 
   // 3. Race Selection (must obey start restrictions)
   let race: Race;
-  if (customOptions?.race && customOptions.race !== "random") {
-    race = races.find((r) => r.id === customOptions.race) || races[0];
+  if (options.race && options.race !== "random") {
+    race = races.find((r) => r.id === options.race) || races[0];
   } else {
     race = selectWeighted(
       races,
@@ -277,11 +297,11 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
   // 8. Rules (filtered by difficulty and custom options)
   // Recruitment
   let recruitment: RuleItem;
-  if (customOptions?.recruitment && customOptions.recruitment !== "random") {
-    const mappedId = `recruitment_${customOptions.recruitment.toLowerCase()}`;
+  if (options.recruitment && options.recruitment !== "random") {
+    const mappedId = `recruitment_${options.recruitment.toLowerCase()}`;
     recruitment =
       recruitmentRules.find((r) => r.id === mappedId) ||
-      recruitmentRules.find((r) => r.id.includes(customOptions.recruitment as string)) ||
+      recruitmentRules.find((r) => r.id.includes(options.recruitment as string)) ||
       recruitmentRules[0];
   } else {
     recruitment = selectWeighted(
@@ -296,11 +316,11 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
 
   // Base Building
   let baseBuilding: RuleItem;
-  if (customOptions?.baseBuilding && customOptions.baseBuilding !== "random") {
-    const mappedId = `base_${customOptions.baseBuilding.toLowerCase()}`;
+  if (options.baseBuilding && options.baseBuilding !== "random") {
+    const mappedId = `base_${options.baseBuilding.toLowerCase()}`;
     baseBuilding =
       baseBuildingRules.find((r) => r.id === mappedId) ||
-      baseBuildingRules.find((r) => r.id.includes(customOptions.baseBuilding as string)) ||
+      baseBuildingRules.find((r) => r.id.includes(options.baseBuilding as string)) ||
       baseBuildingRules[0];
   } else {
     baseBuilding = selectWeighted(
@@ -335,8 +355,8 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
 
   // Save Rules
   let save: RuleItem;
-  if (customOptions?.ironman !== undefined && customOptions.ironman !== "random") {
-    const mappedId = customOptions.ironman ? "save_true_ironman" : "save_reloading";
+  if (options.ironman !== undefined && options.ironman !== "random") {
+    const mappedId = options.ironman ? "save_true_ironman" : "save_reloading";
     save = saveRules.find((s) => s.id === mappedId) || saveRules[0];
   } else {
     save = selectWeighted(
@@ -389,8 +409,12 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
     es: `Una campaña en nivel ${difficultyDetails.name.es} comenzando como ${race.name.es} con ${start.startingSquad.es}. Adoptando el estilo de vida de ${profession.name.es} (${archetype.name.es}), comienzas equipado con un arma de tipo ${weapon.type.es} y vistiendo ${armorSelected.name.es}. Aliado con ${alliedFaction.name.es} para enfrentarte a ${enemyFaction.name.es}, tu grupo sigue las reglas de ${recruitment.name.es} y ${baseBuilding.name.es}. La prueba final del destino: ${finalObjective.description.es}`,
   };
 
+  // Generate the final seed representing the full config
+  const serialized = serializeOptions(options);
+  const finalSeed = serialized ? `${baseSeed}-c-${serialized}` : baseSeed;
+
   return {
-    seed,
+    seed: finalSeed,
     difficulty: {
       level: difficultyLevel,
       name: difficultyDetails.name,
