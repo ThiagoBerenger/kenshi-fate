@@ -38,7 +38,7 @@ export const Layout: React.FC<LayoutProps> = ({
   const t = uiTranslations[lang];
 
   return (
-    <div className="min-h-screen max-w-4xl mx-auto flex flex-col justify-between p-4 md:p-6 gap-6 anim-fade-in">
+    <div className="min-h-screen max-w-5xl mx-auto flex flex-col justify-between p-4 md:p-6 gap-6 anim-fade-in">
       {/* Header Panel */}
       <header className="iron-panel py-6 px-6 text-center border-b-4 border-rust shadow-lg">
         {/* Decorative rivets */}
