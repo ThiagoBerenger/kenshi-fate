@@ -16,6 +16,12 @@ const GithubIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
   </svg>
 );
 
+const EMOJI_BY_LANG: Record<Language, string> = {
+  en: "🇬🇧",
+  pt: "🇧🇷",
+  es: "🇪🇸",
+};
+
 interface LayoutProps {
   children: React.ReactNode;
   lang: Language;
@@ -32,33 +38,35 @@ export const Layout: React.FC<LayoutProps> = ({
   const t = uiTranslations[lang];
 
   return (
-    <div className="min-h-screen flex flex-col justify-between anim-fade-in">
+    <div className="min-h-screen max-w-4xl mx-auto flex flex-col justify-between p-4 md:p-6 gap-6 anim-fade-in">
       {/* Header Panel */}
-      <header className="iron-panel py-8 px-6 text-center border-b-4 border-rust shadow-lg">
+      <header className="iron-panel py-6 px-6 text-center border-b-4 border-rust shadow-lg">
         {/* Decorative rivets */}
         <div className="rivet rivet-tl"></div>
         <div className="rivet rivet-tr"></div>
         <div className="rivet rivet-bl"></div>
         <div className="rivet rivet-br"></div>
 
-        {/* Language selector in top-right */}
-        <div className="absolute top-4 right-4 flex gap-1 z-10 text-xs">
+        {/* Language selector in top-right with flags */}
+        <div className="absolute top-4 right-4 flex gap-2 z-10 text-xl">
           {(["en", "pt", "es"] as const).map((l) => (
             <button
               key={l}
               onClick={() => onLanguageChange(l)}
-              className={`px-2 py-1 font-heading border transition-colors ${
+              className={`p-1 transition-all rounded hover:scale-110 active:scale-95 ${
                 lang === l
-                  ? "bg-rust text-coal border-rust font-bold"
-                  : "bg-coal/80 text-sand-dark border-iron-light hover:border-rust/60 hover:text-sand-light"
+                  ? "bg-rust/20 border border-rust/60 filter-none scale-105"
+                  : "opacity-40 hover:opacity-100 filter grayscale hover:grayscale-0"
               }`}
+              title={l.toUpperCase()}
+              style={{ lineHeight: "1" }}
             >
-              {l.toUpperCase()}
+              {EMOJI_BY_LANG[l]}
             </button>
           ))}
         </div>
 
-        <div className="max-w-4xl mx-auto flex flex-col items-center">
+        <div className="flex flex-col items-center">
           <h1 
             onClick={onNavigateHome}
             className="text-4xl md:text-5xl font-extrabold tracking-widest text-rust hover:text-rust-light cursor-pointer select-none transition-colors duration-150"
@@ -74,21 +82,21 @@ export const Layout: React.FC<LayoutProps> = ({
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-grow flex items-center justify-center py-8 px-4 md:px-8">
-        <div className="w-full max-w-4xl">
+      <main className="flex-grow flex items-center justify-center">
+        <div className="w-full">
           {children}
         </div>
       </main>
 
       {/* Footer Panel */}
-      <footer className="iron-panel py-6 px-6 mt-8 border-t-2 border-iron-light text-center text-xs text-sand-dark">
+      <footer className="iron-panel py-6 px-6 border-t-2 border-iron-light text-center text-xs text-sand-dark">
         {/* Decorative rivets */}
         <div className="rivet rivet-tl"></div>
         <div className="rivet rivet-tr"></div>
         <div className="rivet rivet-bl"></div>
         <div className="rivet rivet-br"></div>
 
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-left max-w-xl">
             <p className="leading-relaxed">
               {t.officialDisclaimer}
