@@ -24,7 +24,7 @@ export const archetypes: Archetype[] = [
     },
     weight: 5,
     tags: ["holy_nation_fanatic", "anti_skeleton", "anti_prosthetic", "anti_shek", "anti_hive"],
-    incompatibleTags: ["skeleton", "robotic", "requires_prosthetics", "torso_start", "escaped_slaves"],
+    incompatibleTags: ["skeleton", "robotic", "requires_prosthetics", "torso_start", "rock_bottom_start", "escaped_slaves"],
     forcedAllies: ["holy_nation"],
     forcedEnemies: ["skin_bandits", "anti_slavers"],
     contentPack: "vanilla",

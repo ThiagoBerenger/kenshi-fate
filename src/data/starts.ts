@@ -143,4 +143,20 @@ export const starts: Start[] = [
     startingLocationId: "sho_battai",
     contentPack: "vanilla",
   },
+  {
+    id: "rock_bottom",
+    name: { en: "Rock Bottom", pt: "Fundo do Poço", es: "Fondo del Pozo" },
+    description: {
+      en: "You start in the Great Desert with no money and only one arm. Better start looking for a replacement.",
+      pt: "Você começa no Grande Deserto sem dinheiro e com apenas um braço. É melhor começar a procurar por um substituto.",
+      es: "Empiezas en el Gran Desierto sin dinero y con un solo brazo. Mejor empieza a buscar un reemplazo.",
+    },
+    startingSquad: { en: "1 One-Armed Wanderer", pt: "1 Andarilho de um Braço Só", es: "1 Vagabundo con un solo Brazo" },
+    weight: 2,
+    allowedRaces: ["greenlander", "scorchlander", "shek", "hive_worker", "hive_prince"],
+    tags: ["rock_bottom_start", "requires_prosthetics"],
+    incompatibleTags: ["no_prosthetics", "prosthetics_forbidden"],
+    startingLocationId: "sho_battai",
+    contentPack: "vanilla",
+  },
 ];

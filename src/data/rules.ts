@@ -197,7 +197,7 @@ export const prostheticsRules: RuleItem[] = [
     weight: 6,
     difficultyLevels: [1, 2, 3],
     tags: ["anti_prosthetic"],
-    incompatibleTags: ["skeleton", "robotic", "requires_prosthetics", "torso_start"],
+    incompatibleTags: ["skeleton", "robotic", "requires_prosthetics", "torso_start", "rock_bottom_start"],
     contentPack: "vanilla",
   },
   {
