@@ -105,32 +105,6 @@ export const Map: React.FC<MapProps> = ({ run, lang }) => {
     });
   }
 
-  // 5. Build sequential path points for drawing the dotted journey route
-  const journeyPoints = [
-    startLoc,
-    ...objectiveLocs,
-    finalTargetLoc,
-  ].filter(Boolean) as LocationItem[];
-
-  // Helper to generate a curved SVG path connecting journey points
-  const getBezierPath = (points: LocationItem[]) => {
-    if (points.length < 2) return "";
-    let path = `M ${points[0].x} ${points[0].y}`;
-    for (let i = 0; i < points.length - 1; i++) {
-      const p1 = points[i];
-      const p2 = points[i + 1];
-      const midX = (p1.x + p2.x) / 2;
-      const midY = (p1.y + p2.y) / 2;
-      const dx = p2.x - p1.x;
-      const dy = p2.y - p1.y;
-      const len = Math.sqrt(dx * dx + dy * dy) || 1;
-      const offset = 4; // perpendicular curve offset
-      const cx = midX - (dy / len) * offset;
-      const cy = midY + (dx / len) * offset;
-      path += ` Q ${cx} ${cy}, ${p2.x} ${p2.y}`;
-    }
-    return path;
-  };
 
   // Helper to handle map clicks and output coordinates in dev mode
   const handleMapClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -208,24 +182,6 @@ export const Map: React.FC<MapProps> = ({ run, lang }) => {
               loading="lazy"
             />
 
-            {/* Dotted Journey Path Overlay */}
-            {journeyPoints.length >= 2 && (
-              <svg 
-                viewBox="0 0 100 100" 
-                preserveAspectRatio="none" 
-                className="absolute inset-0 w-full h-full pointer-events-none"
-              >
-                <path 
-                  d={getBezierPath(journeyPoints)} 
-                  fill="none" 
-                  stroke="#913a25" 
-                  strokeWidth="2.5" 
-                  strokeDasharray="4 4" 
-                  strokeLinecap="round" 
-                  style={{ filter: "drop-shadow(0px 1px 1px rgba(0,0,0,0.45))" }}
-                />
-              </svg>
-            )}
 
             {/* Markers overlay */}
             {markers.map((marker) => {
