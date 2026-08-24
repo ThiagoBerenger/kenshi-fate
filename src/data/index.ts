@@ -15,4 +15,5 @@ export {
 export { restrictions } from "./restrictions";
 export { objectives } from "./objectives";
 export { titleDescriptors, titleTemplates } from "./titleTemplates";
+export { uiTranslations } from "./uiTranslations";
 export type { TitleDescriptor } from "./titleTemplates";

@@ -9,6 +9,8 @@ import type {
   Faction,
   RuleItem,
   TaggedItem,
+  LocalizedString,
+  Language,
 } from "./types";
 import { getSeededRandom } from "./seededRandom";
 import { isCompatible, registerItem } from "./compatibility";
@@ -31,22 +33,38 @@ import {
   titleTemplates,
 } from "../data";
 
-const DIFFICULTY_DETAILS: Record<DifficultyLevel, { name: string; description: string }> = {
+const DIFFICULTY_DETAILS: Record<DifficultyLevel, { name: LocalizedString; description: LocalizedString }> = {
   0: {
-    name: "Wanderer",
-    description: "A standard experience. Few restrictions, normal economy, and room to grow.",
+    name: { en: "Wanderer", pt: "Andarilho", es: "Vagabundo" },
+    description: {
+      en: "A standard experience. Few restrictions, normal economy, and room to grow.",
+      pt: "Uma experiência padrão. Poucas restrições, economia normal e espaço para crescer.",
+      es: "Una experiencia estándar. Pocas restricciones, economía normal y espacio para crecer.",
+    },
   },
   1: {
-    name: "Survivor",
-    description: "A challenging run. Standard rules, minor economic limits, and moderate restrictions.",
+    name: { en: "Survivor", pt: "Sobrevivente", es: "Superviviente" },
+    description: {
+      en: "A challenging run. Standard rules, minor economic limits, and moderate restrictions.",
+      pt: "Uma campanha desafiadora. Regras padrão, pequenos limites econômicos e restrições moderadas.",
+      es: "Una partida desafiante. Reglas estándar, límites económicos menores y restricciones moderadas.",
+    },
   },
   2: {
-    name: "Brutal",
-    description: "A harsh test of survival. Severe restrictions, hard economy, and low recruitment.",
+    name: { en: "Brutal", pt: "Brutal", es: "Brutal" },
+    description: {
+      en: "A harsh test of survival. Severe restrictions, hard economy, and low recruitment.",
+      pt: "Um teste severo de sobrevivência. Restrições severas, economia difícil e baixo recrutamento.",
+      es: "Una dura prueba de supervivencia. Fuertes restricciones, economía difícil y bajo reclutamiento.",
+    },
   },
   3: {
-    name: "Beep",
-    description: "Chaotic mode. Hardcore rules, extreme limitations, and ridiculous requirements.",
+    name: { en: "Beep", pt: "Beep", es: "Beep" },
+    description: {
+      en: "Chaotic mode. Hardcore rules, extreme limitations, and ridiculous requirements.",
+      pt: "Modo caótico. Regras hardcore, limitações extremas e exigências absurdas.",
+      es: "Modo caótico. Reglas extremas, limitaciones severas y requisitos ridículos.",
+    },
   },
 };
 
@@ -71,7 +89,6 @@ function selectWeighted<T extends TaggedItem>(
   });
 
   if (compatiblePool.length === 0) {
-    // Graceful degradation: find anything matching the filter, ignoring tags
     const fallbackPool = pool.filter((item) => !filterFn || filterFn(item));
     if (fallbackPool.length > 0) {
       return fallbackPool[Math.floor(rand() * fallbackPool.length)];
@@ -110,9 +127,7 @@ function selectUniqueWeighted<T extends TaggedItem>(
     if (tempPool.length === 0) break;
     const item = selectWeighted(tempPool, rand, activeTags, accumulatedIncompatibilities, filterFn);
     selected.push(item);
-    // Register item to affect subsequent selections
     registerItem(item, activeTags, accumulatedIncompatibilities);
-    // Remove to avoid duplicates
     tempPool = tempPool.filter((x) => x.id !== item.id);
   }
 
@@ -120,40 +135,53 @@ function selectUniqueWeighted<T extends TaggedItem>(
 }
 
 /**
- * Compiles a title template into a string.
+ * Compiles a title template into a LocalizedString.
  */
 function compileTitle(
   rand: () => number,
-  template: string,
   race: Race,
   faction: Faction,
   profession: Profession,
   archetype: Archetype
-): string {
-  // Determine descriptor set based on race and faction tags
-  let descSet = titleDescriptors.default;
-  if (race.tags?.includes("skeleton")) {
-    descSet = titleDescriptors.skeleton;
-  } else if (race.tags?.includes("hive")) {
-    descSet = titleDescriptors.hive;
-  } else if (race.tags?.includes("shek")) {
-    descSet = titleDescriptors.shek;
-  } else if (faction.tags?.includes("holy_nation_faction")) {
-    descSet = titleDescriptors.holy_nation;
-  } else if (faction.tags?.includes("united_cities_faction")) {
-    descSet = titleDescriptors.united_cities;
-  }
+): LocalizedString {
+  let descKey = "default";
+  if (race.tags?.includes("skeleton")) descKey = "skeleton";
+  else if (race.tags?.includes("hive")) descKey = "hive";
+  else if (race.tags?.includes("shek")) descKey = "shek";
+  else if (faction.tags?.includes("holy_nation_faction")) descKey = "holy_nation";
+  else if (faction.tags?.includes("united_cities_faction")) descKey = "united_cities";
 
-  const selectRandom = (arr: string[]) => arr[Math.floor(rand() * arr.length)];
+  const descSet = titleDescriptors[descKey] || titleDescriptors.default;
 
-  let title = template;
-  title = title.replace("[Adjective]", selectRandom(descSet.adjectives));
-  title = title.replace("[Noun]", selectRandom(descSet.nouns));
-  title = title.replace("[Profession]", profession.name);
-  title = title.replace("[Faction]", faction.name.replace("The ", ""));
-  title = title.replace("[Archetype]", archetype.name);
+  // Draw symmetric indexes so translations correspond
+  const templateIdx = Math.floor(rand() * titleTemplates.en.length);
+  const adjIdx = Math.floor(rand() * descSet.adjectives.en.length);
+  const nounIdx = Math.floor(rand() * descSet.nouns.en.length);
 
-  return title;
+  const cleanFaction = (name: string) => {
+    return name
+      .replace(/^The\s+/i, "")
+      .replace(/^A\s+/i, "")
+      .replace(/^As\s+/i, "")
+      .replace(/^El\s+/i, "")
+      .replace(/^La\s+/i, "");
+  };
+
+  const compileForLang = (lang: Language): string => {
+    let title = titleTemplates[lang][templateIdx];
+    title = title.replace("[Adjective]", descSet.adjectives[lang][adjIdx]);
+    title = title.replace("[Noun]", descSet.nouns[lang][nounIdx]);
+    title = title.replace("[Profession]", profession.name[lang]);
+    title = title.replace("[Faction]", cleanFaction(faction.name[lang]));
+    title = title.replace("[Archetype]", archetype.name[lang]);
+    return title;
+  };
+
+  return {
+    en: compileForLang("en"),
+    pt: compileForLang("pt"),
+    es: compileForLang("es"),
+  };
 }
 
 /**
@@ -169,7 +197,6 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
   if (customOptions?.difficulty !== undefined && customOptions.difficulty !== "random") {
     difficultyLevel = customOptions.difficulty;
   } else {
-    // Weighted selection of difficulties: Survivor (4) > Wanderer (3) > Brutal (2) > Beep (1)
     const diffRand = rand();
     if (diffRand < 0.3) difficultyLevel = 0;
     else if (diffRand < 0.7) difficultyLevel = 1;
@@ -219,7 +246,6 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
   registerItem(armorSelected, activeTags, accumulatedIncompatibilities);
 
   // 7. World Factions (Allied & Enemy)
-  // Force allies if specified by archetype
   let alliedFaction: Faction;
   if (archetype.forcedAllies && archetype.forcedAllies.length > 0) {
     const forcedId = archetype.forcedAllies[Math.floor(rand() * archetype.forcedAllies.length)];
@@ -229,7 +255,6 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
   }
   registerItem(alliedFaction, activeTags, accumulatedIncompatibilities);
 
-  // Force enemies if specified, ensuring it's not the allied faction
   let enemyFaction: Faction;
   if (
     archetype.forcedEnemies &&
@@ -324,7 +349,7 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
   }
   registerItem(save, activeTags, accumulatedIncompatibilities);
 
-  // 9. Restrictions (Count based on difficulty: Wanderer: 2, Survivor: 3, Brutal: 4, Beep: 5)
+  // 9. Restrictions
   const restrictionCount = difficultyLevel + 2;
   const runRestrictions = selectUniqueWeighted(
     restrictions,
@@ -335,7 +360,7 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
     (r) => r.difficultyLevels.includes(difficultyLevel)
   );
 
-  // 10. Intermediate Objectives (Select exactly 3)
+  // 10. Intermediate Objectives
   const runObjectives = selectUniqueWeighted(
     objectives,
     3,
@@ -345,7 +370,7 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
     (o) => !o.isFinal && o.difficultyLevels.includes(difficultyLevel)
   );
 
-  // 11. Final Objective (Select exactly 1)
+  // 11. Final Objective
   const finalObjective = selectWeighted(
     objectives,
     rand,
@@ -356,21 +381,13 @@ export function generateRun(seed: string, customOptions?: CustomOptions): Playth
   registerItem(finalObjective, activeTags, accumulatedIncompatibilities);
 
   // 12. Compile Title and Narrative Description
-  const titleTemplate = titleTemplates[Math.floor(rand() * titleTemplates.length)];
-  const title = compileTitle(rand, titleTemplate, race, alliedFaction, profession, archetype);
+  const title = compileTitle(rand, race, alliedFaction, profession, archetype);
 
-  // Generate a short atmospheric narrative description based on the campaign elements
-  const descPronoun = race.tags?.includes("hive") ? "It" : "They";
-  const descVerb = descPronoun === "It" ? "is" : "are";
-  const description = `A ${difficultyDetails.name} playthrough starting as a ${race.name} with ${
-    start.startingSquad
-  }. Embracing the lifestyle of a ${profession.name} (${archetype.name}), ${descPronoun.toLowerCase()} ${descVerb} equipped with a ${
-    weapon.type
-  } weapon and wearing ${
-    armorSelected.name
-  }. Allied with ${alliedFaction.name} to stand against ${enemyFaction.name}, the squad operates under ${
-    recruitment.name
-  } rules and ${baseBuilding.name}. The ultimate test of fate: ${finalObjective.description}`;
+  const description: LocalizedString = {
+    en: `A ${difficultyDetails.name.en} playthrough starting as a ${race.name.en} with ${start.startingSquad.en}. Embracing the lifestyle of a ${profession.name.en} (${archetype.name.en}), they are equipped with a ${weapon.type.en} weapon and wearing ${armorSelected.name.en}. Allied with ${alliedFaction.name.en} to stand against ${enemyFaction.name.en}, the squad operates under ${recruitment.name.en} rules and ${baseBuilding.name.en}. The ultimate test of fate: ${finalObjective.description.en}`,
+    pt: `Uma campanha no nível ${difficultyDetails.name.pt} começando como ${race.name.pt} com ${start.startingSquad.pt}. Abraçando o estilo de vida de ${profession.name.pt} (${archetype.name.pt}), você começa equipado com uma arma de categoria ${weapon.type.pt} e vestindo ${armorSelected.name.pt}. Aliado com ${alliedFaction.name.pt} para enfrentar ${enemyFaction.name.pt}, seu esquadrão segue as regras de ${recruitment.name.pt} e ${baseBuilding.name.pt}. O teste final do destino: ${finalObjective.description.pt}`,
+    es: `Una campaña en nivel ${difficultyDetails.name.es} comenzando como ${race.name.es} con ${start.startingSquad.es}. Adoptando el estilo de vida de ${profession.name.es} (${archetype.name.es}), comienzas equipado con un arma de tipo ${weapon.type.es} y vistiendo ${armorSelected.name.es}. Aliado con ${alliedFaction.name.es} para enfrentarte a ${enemyFaction.name.es}, tu grupo sigue las reglas de ${recruitment.name.es} y ${baseBuilding.name.es}. La prueba final del destino: ${finalObjective.description.es}`,
+  };
 
   return {
     seed,

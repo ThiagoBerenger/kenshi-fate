@@ -1,15 +1,24 @@
 import React from "react";
 import { Sliders, RefreshCw } from "lucide-react";
-import type { CustomOptions, DifficultyLevel } from "../engine/types";
+import type { CustomOptions, DifficultyLevel, Language } from "../engine/types";
 import { starts, races } from "../data";
+import { uiTranslations } from "../data/uiTranslations";
 
 interface CustomizerProps {
   options: CustomOptions;
+  lang: Language;
   onChange: (options: CustomOptions) => void;
   onGenerate: () => void;
 }
 
-export const Customizer: React.FC<CustomizerProps> = ({ options, onChange, onGenerate }) => {
+export const Customizer: React.FC<CustomizerProps> = ({ 
+  options, 
+  lang, 
+  onChange, 
+  onGenerate 
+}) => {
+  const t = uiTranslations[lang];
+
   const handleSelectChange = (key: keyof CustomOptions, value: any) => {
     let parsedValue = value;
     if (value === "true") parsedValue = true;
@@ -34,7 +43,7 @@ export const Customizer: React.FC<CustomizerProps> = ({ options, onChange, onGen
       <div className="flex items-center gap-2 border-b border-iron-light pb-3 mb-6">
         <Sliders size={20} className="text-rust" />
         <h2 className="text-xl font-heading text-sand-light tracking-wider">
-          Configure Your Destiny
+          {t.configureDestiny}
         </h2>
       </div>
 
@@ -42,35 +51,35 @@ export const Customizer: React.FC<CustomizerProps> = ({ options, onChange, onGen
         {/* Difficulty */}
         <div>
           <label className="font-heading text-xs tracking-wider text-sand-dark block mb-2">
-            Difficulty Level
+            {t.difficultyLevel}
           </label>
           <select
             value={options.difficulty === undefined ? "random" : options.difficulty}
             onChange={(e) => handleSelectChange("difficulty", e.target.value)}
             className="select-custom"
           >
-            <option value="random">Random Fate</option>
-            <option value="0">Wanderer (Easy)</option>
-            <option value="1">Survivor (Medium)</option>
-            <option value="2">Brutal (Hard)</option>
-            <option value="3">Beep (Chaotic)</option>
+            <option value="random">{t.randomFate}</option>
+            <option value="0">{lang === "en" ? "Wanderer (Easy)" : lang === "pt" ? "Andarilho (Fácil)" : "Vagabundo (Fácil)"}</option>
+            <option value="1">{lang === "en" ? "Survivor (Medium)" : lang === "pt" ? "Sobrevivente (Médio)" : "Superviviente (Medio)"}</option>
+            <option value="2">{lang === "en" ? "Brutal (Hard)" : lang === "pt" ? "Brutal (Difícil)" : "Brutal (Difícil)"}</option>
+            <option value="3">{lang === "en" ? "Beep (Chaotic)" : lang === "pt" ? "Beep (Caótico)" : "Beep (Caótico)"}</option>
           </select>
         </div>
 
         {/* Start Scenario */}
         <div>
           <label className="font-heading text-xs tracking-wider text-sand-dark block mb-2">
-            Starting Scenario
+            {t.startingScenario}
           </label>
           <select
             value={options.start || "random"}
             onChange={(e) => handleSelectChange("start", e.target.value)}
             className="select-custom"
           >
-            <option value="random">Random Start</option>
+            <option value="random">{t.randomStart}</option>
             {starts.map((s) => (
               <option key={s.id} value={s.id}>
-                {s.name}
+                {s.name[lang]}
               </option>
             ))}
           </select>
@@ -79,17 +88,17 @@ export const Customizer: React.FC<CustomizerProps> = ({ options, onChange, onGen
         {/* Race */}
         <div>
           <label className="font-heading text-xs tracking-wider text-sand-dark block mb-2">
-            Main Character Race
+            {t.race}
           </label>
           <select
             value={options.race || "random"}
             onChange={(e) => handleSelectChange("race", e.target.value)}
             className="select-custom"
           >
-            <option value="random">Random Race</option>
+            <option value="random">{t.randomRace}</option>
             {races.map((r) => (
               <option key={r.id} value={r.id}>
-                {r.name}
+                {r.name[lang]}
               </option>
             ))}
           </select>
@@ -98,50 +107,50 @@ export const Customizer: React.FC<CustomizerProps> = ({ options, onChange, onGen
         {/* Base Building */}
         <div>
           <label className="font-heading text-xs tracking-wider text-sand-dark block mb-2">
-            Base Building Preference
+            {t.basePreference}
           </label>
           <select
             value={options.baseBuilding || "random"}
             onChange={(e) => handleSelectChange("baseBuilding", e.target.value)}
             className="select-custom"
           >
-            <option value="random">Random Outpost Preference</option>
-            <option value="Allowed">Allowed / Free choice</option>
-            <option value="Forbidden">Forbidden (City Dwellers)</option>
-            <option value="Required">Required Outpost</option>
+            <option value="random">{t.randomBasePreference}</option>
+            <option value="Allowed">{t.allowedFree}</option>
+            <option value="Forbidden">{t.forbiddenNomad}</option>
+            <option value="Required">{t.requiredOutpost}</option>
           </select>
         </div>
 
         {/* Recruitment */}
         <div>
           <label className="font-heading text-xs tracking-wider text-sand-dark block mb-2">
-            Squad Recruitment
+            {t.squadRecruitment}
           </label>
           <select
             value={options.recruitment || "random"}
             onChange={(e) => handleSelectChange("recruitment", e.target.value)}
             className="select-custom"
           >
-            <option value="random">Random Recruit Limits</option>
-            <option value="Unlimited">Unlimited Recruitment</option>
-            <option value="Limited">Limited (Max 5)</option>
-            <option value="Solo">Solo Run (No Recruits)</option>
+            <option value="random">{t.randomRecruitLimits}</option>
+            <option value="Unlimited">{t.unlimitedRecruitment}</option>
+            <option value="Limited">{t.limitedMax5}</option>
+            <option value="Solo">{t.soloRun}</option>
           </select>
         </div>
 
         {/* Ironman Mode */}
         <div>
           <label className="font-heading text-xs tracking-wider text-sand-dark block mb-2">
-            Ironman Saving Rule
+            {t.ironmanSaving}
           </label>
           <select
             value={options.ironman === undefined ? "random" : String(options.ironman)}
             onChange={(e) => handleSelectChange("ironman", e.target.value)}
             className="select-custom"
           >
-            <option value="random">Random Save Rules</option>
-            <option value="true">Yes (True Ironman)</option>
-            <option value="false">No (Reloading Allowed)</option>
+            <option value="random">{t.randomSaveRules}</option>
+            <option value="true">{t.yesTrueIronman}</option>
+            <option value="false">{t.noReloading}</option>
           </select>
         </div>
       </div>
@@ -152,7 +161,7 @@ export const Customizer: React.FC<CustomizerProps> = ({ options, onChange, onGen
           className="btn-metal btn-metal-rust w-full md:w-auto"
         >
           <RefreshCw size={18} />
-          Generate Custom Run
+          {t.generateCustomRun}
         </button>
       </div>
     </div>

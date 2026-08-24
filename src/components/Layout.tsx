@@ -1,5 +1,7 @@
 import React from "react";
 import { Heart } from "lucide-react";
+import type { Language } from "../engine/types";
+import { uiTranslations } from "../data/uiTranslations";
 
 const GithubIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
   <svg
@@ -16,10 +18,19 @@ const GithubIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
 
 interface LayoutProps {
   children: React.ReactNode;
+  lang: Language;
+  onLanguageChange: (lang: Language) => void;
   onNavigateHome?: () => void;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children, onNavigateHome }) => {
+export const Layout: React.FC<LayoutProps> = ({ 
+  children, 
+  lang, 
+  onLanguageChange, 
+  onNavigateHome 
+}) => {
+  const t = uiTranslations[lang];
+
   return (
     <div className="min-h-screen flex flex-col justify-between anim-fade-in">
       {/* Header Panel */}
@@ -30,16 +41,33 @@ export const Layout: React.FC<LayoutProps> = ({ children, onNavigateHome }) => {
         <div className="rivet rivet-bl"></div>
         <div className="rivet rivet-br"></div>
 
+        {/* Language selector in top-right */}
+        <div className="absolute top-4 right-4 flex gap-1 z-10 text-xs">
+          {(["en", "pt", "es"] as const).map((l) => (
+            <button
+              key={l}
+              onClick={() => onLanguageChange(l)}
+              className={`px-2 py-1 font-heading border transition-colors ${
+                lang === l
+                  ? "bg-rust text-coal border-rust font-bold"
+                  : "bg-coal/80 text-sand-dark border-iron-light hover:border-rust/60 hover:text-sand-light"
+              }`}
+            >
+              {l.toUpperCase()}
+            </button>
+          ))}
+        </div>
+
         <div className="max-w-4xl mx-auto flex flex-col items-center">
           <h1 
             onClick={onNavigateHome}
             className="text-4xl md:text-5xl font-extrabold tracking-widest text-rust hover:text-rust-light cursor-pointer select-none transition-colors duration-150"
             style={{ textShadow: "3px 3px 0px rgba(0,0,0,0.8)" }}
           >
-            Kenshi Fate
+            {t.heroTitle}
           </h1>
           <p className="font-heading text-lg md:text-xl tracking-wider text-sand-light mt-2 uppercase">
-            Let fate decide your next run.
+            {t.heroSubtitle}
           </p>
           <div className="h-1 w-32 bg-rust mt-4"></div>
         </div>
@@ -63,10 +91,10 @@ export const Layout: React.FC<LayoutProps> = ({ children, onNavigateHome }) => {
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-left max-w-xl">
             <p className="leading-relaxed">
-              Kenshi Fate is an unofficial fan-made project and is not affiliated with or endorsed by Lo-Fi Games.
+              {t.officialDisclaimer}
             </p>
             <p className="mt-1 text-rust-dark font-semibold">
-              Made with <Heart size={10} className="inline fill-current" /> for the Kenshi Community.
+              {t.madeWith} <Heart size={10} className="inline fill-current text-rust" /> {t.forCommunity}
             </p>
           </div>
           <div className="flex items-center gap-4">

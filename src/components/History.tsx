@@ -1,14 +1,23 @@
 import React from "react";
 import { History as HistoryIcon, Trash2, ArrowRight } from "lucide-react";
-import type { PlaythroughRun } from "../engine/types";
+import type { PlaythroughRun, Language } from "../engine/types";
+import { uiTranslations } from "../data/uiTranslations";
 
 interface HistoryProps {
   runs: PlaythroughRun[];
+  lang: Language;
   onSelectRun: (run: PlaythroughRun) => void;
   onClearHistory: () => void;
 }
 
-export const History: React.FC<HistoryProps> = ({ runs, onSelectRun, onClearHistory }) => {
+export const History: React.FC<HistoryProps> = ({ 
+  runs, 
+  lang, 
+  onSelectRun, 
+  onClearHistory 
+}) => {
+  const t = uiTranslations[lang];
+
   if (runs.length === 0) {
     return null;
   }
@@ -25,7 +34,7 @@ export const History: React.FC<HistoryProps> = ({ runs, onSelectRun, onClearHist
         <div className="flex items-center gap-2">
           <HistoryIcon size={18} className="text-rust" />
           <h2 className="text-lg font-heading text-sand-light tracking-wider">
-            Recent Runs
+            {t.recentRuns}
           </h2>
         </div>
         <button
@@ -34,7 +43,7 @@ export const History: React.FC<HistoryProps> = ({ runs, onSelectRun, onClearHist
           title="Clear all saved history"
         >
           <Trash2 size={10} />
-          Clear History
+          {t.clearHistory}
         </button>
       </div>
 
@@ -48,14 +57,14 @@ export const History: React.FC<HistoryProps> = ({ runs, onSelectRun, onClearHist
             <div className="flex flex-col gap-1 text-left">
               <div className="flex items-center flex-wrap gap-2">
                 <span className="font-semibold text-xs font-typewriter text-sand-light group-hover:text-rust transition-colors">
-                  {run.title}
+                  {run.title[lang]}
                 </span>
                 <span className={`badge-diff badge-diff-${run.difficulty.level} px-1.5 py-0.5 text-xxs`}>
-                  {run.difficulty.name}
+                  {run.difficulty.name[lang]}
                 </span>
               </div>
               <span className="text-xxs text-sand-dark">
-                {run.start.name} • {run.race.name} • {run.seed}
+                {run.start.name[lang]} • {run.race.name[lang]} • {run.seed}
               </span>
             </div>
             <ArrowRight size={14} className="text-sand-dark group-hover:text-rust group-hover:translate-x-1 transition-all" />

@@ -37,7 +37,7 @@ for (let i = 0; i < 5000; i++) {
     // 2. Solo vs Squad checks
     const isSolo = run.rules.recruitment.id === "recruitment_solo" || run.rules.recruitment.tags?.includes("solo");
     if (isSolo && run.start.incompatibleTags?.includes("solo")) {
-      console.error(`❌ Failure: Solo run generated with squad-only start (${run.start.name})! Seed: ${seed}`);
+      console.error(`❌ Failure: Solo run generated with squad-only start (${run.start.name.en})! Seed: ${seed}`);
       failures++;
     }
 
@@ -48,18 +48,18 @@ for (let i = 0; i < 5000; i++) {
 
     // 3. Faction Clashes
     if (run.alliedFaction.id === run.enemyFaction.id) {
-      console.error(`❌ Failure: Allied faction is identical to Enemy faction (${run.alliedFaction.name})! Seed: ${seed}`);
+      console.error(`❌ Failure: Allied faction is identical to Enemy faction (${run.alliedFaction.name.en})! Seed: ${seed}`);
       failures++;
     }
 
     // 4. Basic Integrity
-    if (!run.title || run.title.trim() === "") {
-      console.error(`❌ Failure: Run has an empty title! Seed: ${seed}`);
+    if (!run.title.en || run.title.en.trim() === "" || !run.title.pt || run.title.pt.trim() === "" || !run.title.es || run.title.es.trim() === "") {
+      console.error(`❌ Failure: Run has an empty title in one of the languages! Seed: ${seed}`);
       failures++;
     }
 
-    if (!run.description || run.description.trim() === "") {
-      console.error(`❌ Failure: Run has an empty description! Seed: ${seed}`);
+    if (!run.description.en || run.description.en.trim() === "" || !run.description.pt || run.description.pt.trim() === "" || !run.description.es || run.description.es.trim() === "") {
+      console.error(`❌ Failure: Run has an empty description in one of the languages! Seed: ${seed}`);
       failures++;
     }
 

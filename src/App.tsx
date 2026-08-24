@@ -7,11 +7,26 @@ import { History } from "./components/History";
 import { FateLoader } from "./components/FateLoader";
 import { generateRun } from "./engine/generator";
 import { generateRandomSeed } from "./engine/seededRandom";
-import type { PlaythroughRun, CustomOptions } from "./engine/types";
+import type { PlaythroughRun, CustomOptions, Language } from "./engine/types";
+import { uiTranslations } from "./data/uiTranslations";
 
 const LOCAL_STORAGE_KEY = "kenshi-fate-runs-history";
+const LANG_STORAGE_KEY = "kenshi-fate-language";
 
 function App() {
+  const [lang, setLang] = useState<Language>(() => {
+    // 1. Check local storage
+    const saved = localStorage.getItem(LANG_STORAGE_KEY);
+    if (saved === "en" || saved === "pt" || saved === "es") {
+      return saved as Language;
+    }
+    // 2. Check browser locale
+    const browserLang = navigator.language.split("-")[0];
+    if (browserLang === "pt") return "pt";
+    if (browserLang === "es") return "es";
+    return "en";
+  });
+
   const [view, setView] = useState<"home" | "run">("home");
   const [currentRun, setCurrentRun] = useState<PlaythroughRun | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +40,8 @@ function App() {
     ironman: "random",
   });
   const [history, setHistory] = useState<PlaythroughRun[]>([]);
+
+  const t = uiTranslations[lang];
 
   // 1. Initial Load: Check URL Seed & Load History
   useEffect(() => {
@@ -61,7 +78,17 @@ function App() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
-  // 2. Generation Trigger
+  // 2. Language Change handler
+  const handleLanguageChange = (newLang: Language) => {
+    setLang(newLang);
+    try {
+      localStorage.setItem(LANG_STORAGE_KEY, newLang);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  // 3. Generation Trigger
   const triggerGeneration = (seed: string, skipLoader = false, options?: CustomOptions) => {
     if (skipLoader) {
       resolveRun(seed, options);
@@ -105,7 +132,7 @@ function App() {
     });
   };
 
-  // 3. Game Mode Triggers
+  // 4. Game Mode Triggers
   const handleRandomRun = () => {
     const seed = generateRandomSeed();
     triggerGeneration(seed);
@@ -145,9 +172,9 @@ function App() {
   };
 
   return (
-    <Layout onNavigateHome={handleNavigateHome}>
+    <Layout lang={lang} onLanguageChange={handleLanguageChange} onNavigateHome={handleNavigateHome}>
       {isLoading ? (
-        <FateLoader />
+        <FateLoader lang={lang} />
       ) : view === "run" && currentRun ? (
         <div className="flex flex-col gap-4">
           <div>
@@ -156,10 +183,10 @@ function App() {
               className="btn-metal py-2 px-4 text-xs inline-flex items-center gap-1.5"
             >
               <ArrowLeft size={12} />
-              Return to Camp
+              {t.returnToCamp}
             </button>
           </div>
-          <RunCard run={currentRun} onGenerateNew={handleRandomRun} />
+          <RunCard run={currentRun} lang={lang} onGenerateNew={handleRandomRun} />
         </div>
       ) : (
         /* Home Screen */
@@ -172,11 +199,10 @@ function App() {
             <div className="rivet rivet-br"></div>
 
             <h2 className="text-2xl font-heading text-rust mb-2">
-              Let the desert claim your destiny.
+              {t.heroSubtitle}
             </h2>
             <p className="max-w-xl text-sm leading-relaxed text-sand-light/95 font-monospace">
-              Generate a unique Kenshi playthrough with randomized origins, rules, alliances, restrictions and objectives. 
-              Our engine ensures compatible lore combinations—avoiding contradictions so your runs stay clean and challenging.
+              {t.heroDescription}
             </p>
 
             <div className="mt-8">
@@ -185,7 +211,7 @@ function App() {
                 className="btn-metal btn-metal-rust text-lg px-8 py-4 animate-pulse hover:animate-none"
               >
                 <Dices size={20} />
-                Generate Run
+                {t.generateRun}
               </button>
             </div>
           </div>
@@ -204,9 +230,9 @@ function App() {
               
               <div className="flex flex-col items-center">
                 <Dices size={24} className="text-rust mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="font-heading text-lg text-sand-light mb-1">Random Run</h3>
+                <h3 className="font-heading text-lg text-sand-light mb-1">{t.randomRun}</h3>
                 <p className="text-xs text-sand-dark">
-                  Instantly roll a completely randomized character, rule set, and objectives.
+                  {t.randomRunDesc}
                 </p>
               </div>
             </div>
@@ -223,9 +249,9 @@ function App() {
 
               <div className="flex flex-col items-center">
                 <Sliders size={24} className="text-rust mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="font-heading text-lg text-sand-light mb-1">Custom Run</h3>
+                <h3 className="font-heading text-lg text-sand-light mb-1">{t.customRun}</h3>
                 <p className="text-xs text-sand-dark">
-                  Toggle constraints on start conditions, races, or difficulty level before rolling.
+                  {t.customRunDesc}
                 </p>
               </div>
             </div>
@@ -242,9 +268,9 @@ function App() {
 
               <div className="flex flex-col items-center">
                 <Calendar size={24} className="text-rust mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="font-heading text-lg text-sand-light mb-1">Daily Challenge</h3>
+                <h3 className="font-heading text-lg text-sand-light mb-1">{t.dailyChallenge}</h3>
                 <p className="text-xs text-sand-dark">
-                  Obtain the same challenge as every wanderer in the world today. Reset daily.
+                  {t.dailyChallengeDesc}
                 </p>
               </div>
             </div>
@@ -254,6 +280,7 @@ function App() {
           {customizerOpen && (
             <Customizer
               options={customOptions}
+              lang={lang}
               onChange={setCustomOptions}
               onGenerate={handleCustomRun}
             />
@@ -262,6 +289,7 @@ function App() {
           {/* Local History Panel */}
           <History
             runs={history}
+            lang={lang}
             onSelectRun={handleSelectHistoryRun}
             onClearHistory={handleClearHistory}
           />

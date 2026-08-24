@@ -3,8 +3,12 @@ import type { Archetype } from "../engine/types";
 export const archetypes: Archetype[] = [
   {
     id: "lone_wolf",
-    name: "Lone Wolf",
-    description: "You walk alone. You despise relying on others and prefer to fight your own battles.",
+    name: { en: "Lone Wolf", pt: "Lobo Solitário", es: "Lobo Solitario" },
+    description: {
+      en: "You walk alone. You despise relying on others and prefer to fight your own battles.",
+      pt: "Você caminha sozinho. Você despreza depender dos outros e prefere lutar suas próprias batalhas.",
+      es: "Caminas solo. Desprecias depender de los demás y prefieres librar tus propias batallas.",
+    },
     weight: 10,
     tags: ["solo"],
     incompatibleTags: ["multi_character"],
@@ -12,8 +16,12 @@ export const archetypes: Archetype[] = [
   },
   {
     id: "holy_nation_fanatic",
-    name: "Holy Nation Fanatic",
-    description: "A zealous follower of Okran. You purge darkness, detest Skeletons, and shun cybernetic limbs.",
+    name: { en: "Holy Nation Fanatic", pt: "Fanático da Holy Nation", es: "Fanático de la Nación Sagrada" },
+    description: {
+      en: "A zealous follower of Okran. You purge darkness, detest Skeletons, and shun cybernetic limbs.",
+      pt: "Um seguidor fervoroso de Okran. Você expurga as trevas, detesta Skeletons e evita membros cibernéticos.",
+      es: "Un ferviente seguidor de Okran. Purgas la oscuridad, detestas a los Esqueletos y evitas las extremidades cibernéticas.",
+    },
     weight: 5,
     tags: ["holy_nation_fanatic", "anti_skeleton", "anti_prosthetic", "anti_shek", "anti_hive"],
     incompatibleTags: ["skeleton", "robotic", "requires_prosthetics", "torso_start", "escaped_slaves"],
@@ -23,8 +31,12 @@ export const archetypes: Archetype[] = [
   },
   {
     id: "anti_slavery_rebel",
-    name: "Anti-Slavery Zealot",
-    description: "Slavery is a cancer on the world. You are dedicated to breaking chains and bringing down the Nobles.",
+    name: { en: "Anti-Slavery Zealot", pt: "Militante Antiescravagista", es: "Militante Antiesclavista" },
+    description: {
+      en: "Slavery is a cancer on the world. You are dedicated to breaking chains and bringing down the Nobles.",
+      pt: "A escravidão é um câncer no mundo. Você se dedica a quebrar correntes e derrubar os Nobres.",
+      es: "La esclavitud es un cáncer en el mundo. Te dedicas a romper cadenas y derrocar a los Nobles.",
+    },
     weight: 7,
     tags: ["anti_slavery_focused", "anti_noble"],
     incompatibleTags: ["holy_nation_fanatic"],
@@ -34,8 +46,12 @@ export const archetypes: Archetype[] = [
   },
   {
     id: "hive_exile",
-    name: "Hive Exile / No-Hive",
-    description: "Cut off from the Queen's hive mind. You must learn to survive in the alien human world.",
+    name: { en: "Hive Exile / No-Hive", pt: "Exilado Hive / Sem-Colmeia", es: "Exiliado de la Colmena / Sin-Colmena" },
+    description: {
+      en: "Cut off from the Queen's hive mind. You must learn to survive in the alien human world.",
+      pt: "Cortado da mente coletiva da Rainha. Você deve aprender a sobreviver no mundo alienígena dos humanos.",
+      es: "Cortado de la mente colmena de la Reina. Debes aprender a sobrevivir en el extraño mundo de los humanos.",
+    },
     weight: 6,
     tags: ["hive_exile"],
     requiresTags: ["hive"],
@@ -43,8 +59,12 @@ export const archetypes: Archetype[] = [
   },
   {
     id: "cybernetic_ascendant",
-    name: "Cybernetic Ascendant",
-    description: "Flesh is weak. You seek to replace all your limbs with advanced mechanical prosthetics.",
+    name: { en: "Cybernetic Ascendant", pt: "Ascendente Cibernético", es: "Ascendente Cibernético" },
+    description: {
+      en: "Flesh is weak. You seek to replace all your limbs with advanced mechanical prosthetics.",
+      pt: "A carne é fraca. Você busca substituir todos os seus membros por próteses mecânicas avançadas.",
+      es: "La carne es débil. Buscas reemplazar todas tus extremidades con prótesis mecánicas avanzadas.",
+    },
     weight: 5,
     tags: ["prosthetic_required"],
     incompatibleTags: ["anti_prosthetic", "holy_nation_fanatic"],
@@ -52,8 +72,12 @@ export const archetypes: Archetype[] = [
   },
   {
     id: "pacifist_scholar",
-    name: "Pacifist Explorer",
-    description: "You believe violence is a failure. You run from fights and focus on discovery and science.",
+    name: { en: "Pacifist Explorer", pt: "Explorador Pacifista", es: "Explorador Pacifista" },
+    description: {
+      en: "You believe violence is a failure. You run from fights and focus on discovery and science.",
+      pt: "Você acredita que a violência é um fracasso. Você foge de brigas e foca em descobertas e ciência.",
+      es: "Crees que la violencia es un fracaso. Huyes de las peleas y te enfocas en el descubrimiento y la ciencia.",
+    },
     weight: 4,
     tags: ["pacifist"],
     incompatibleTags: ["combat_focused"],
@@ -61,8 +85,12 @@ export const archetypes: Archetype[] = [
   },
   {
     id: "skeleton_preservationist",
-    name: "Skeleton Preservationist",
-    description: "An ancient machine guarding the secrets of the past, wary of the fleeting human races.",
+    name: { en: "Skeleton Preservationist", pt: "Preservacionista Skeleton", es: "Preservacionista Esqueleto" },
+    description: {
+      en: "An ancient machine guarding the secrets of the past, wary of the fleeting human races.",
+      pt: "Uma máquina antiga guardando os segredos do passado, desconfiada das raças humanas passageiras.",
+      es: "Una máquina antigua que guarda los secretos del pasado, desconfiada de las efímeras razas humanas.",
+    },
     weight: 5,
     tags: ["skeleton_loyalist"],
     requiresTags: ["skeleton"],
@@ -73,16 +101,24 @@ export const archetypes: Archetype[] = [
   },
   {
     id: "honor_bound_warrior",
-    name: "Honor-Bound Warrior",
-    description: "You live by a strict martial code. Cowardice is worse than death.",
+    name: { en: "Honor-Bound Warrior", pt: "Guerreiro de Honra", es: "Guerrero de Honor" },
+    description: {
+      en: "You live by a strict martial code. Cowardice is worse than death.",
+      pt: "Você vive sob um código marcial estrito. A covardia é pior do que a morte.",
+      es: "Vives bajo un estricto código marcial. La cobardía es peor que la muerte.",
+    },
     weight: 8,
     tags: ["combat_focused"],
     contentPack: "vanilla",
   },
   {
     id: "opportunist",
-    name: "Shady Opportunist",
-    description: "No loyalties, no codes. You follow the money, wherever it leads.",
+    name: { en: "Shady Opportunist", pt: "Oportunista Suspeito", es: "Oportunista Sospechoso" },
+    description: {
+      en: "No loyalties, no codes. You follow the money, wherever it leads.",
+      pt: "Sem lealdades, sem códigos. Você segue o dinheiro, onde quer que ele leve.",
+      es: "Sin lealtades ni códigos. Sigues el dinero, a donde quiera que te lleve.",
+    },
     weight: 10,
     contentPack: "vanilla",
   },

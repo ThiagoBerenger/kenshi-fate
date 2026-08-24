@@ -13,16 +13,19 @@ import {
   Check, 
   Info 
 } from "lucide-react";
-import type { PlaythroughRun } from "../engine/types";
+import type { PlaythroughRun, Language } from "../engine/types";
+import { uiTranslations } from "../data/uiTranslations";
 
 interface RunCardProps {
   run: PlaythroughRun;
+  lang: Language;
   onGenerateNew: () => void;
 }
 
-export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
+export const RunCard: React.FC<RunCardProps> = ({ run, lang, onGenerateNew }) => {
   const [copiedSeed, setCopiedSeed] = useState(false);
   const [copiedShare, setCopiedShare] = useState(false);
+  const t = uiTranslations[lang];
 
   const handleCopySeed = () => {
     navigator.clipboard.writeText(run.seed);
@@ -48,7 +51,7 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
         <div className="rivet rivet-br"></div>
 
         <div className="flex items-center gap-3">
-          <span className="font-heading text-sm text-sand-dark">Seed:</span>
+          <span className="font-heading text-sm text-sand-dark">{t.seed}</span>
           <span className="font-bold text-rust bg-coal px-3 py-1 font-monospace border border-iron-light">{run.seed}</span>
           <button 
             onClick={handleCopySeed}
@@ -56,7 +59,7 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
             title="Copy Seed to clipboard"
           >
             {copiedSeed ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
-            {copiedSeed ? "Copied!" : "Copy"}
+            {copiedSeed ? t.copied : t.copy}
           </button>
         </div>
 
@@ -67,7 +70,7 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
             title="Copy sharing link"
           >
             {copiedShare ? <Check size={12} className="text-green-500" /> : <Share2 size={12} />}
-            {copiedShare ? "Link Copied!" : "Share Run"}
+            {copiedShare ? t.linkCopied : t.shareRun}
           </button>
           <button 
             onClick={onGenerateNew}
@@ -75,7 +78,7 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
             title="Generate a brand new campaign"
           >
             <RefreshCw size={12} />
-            Generate Another
+            {t.generateAnother}
           </button>
         </div>
       </div>
@@ -88,14 +91,14 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
           <div className="text-center border-b-2 border-dashed border-sand-dark pb-6 mb-8">
             <div className="flex justify-center mb-2">
               <span className={`badge-diff badge-diff-${run.difficulty.level}`}>
-                Difficulty: {run.difficulty.name}
+                {t.difficultyLevel}: {run.difficulty.name[lang]}
               </span>
             </div>
             <h2 className="text-3xl md:text-4xl font-extrabold text-text-dark tracking-wider mb-2">
-              {run.title}
+              {run.title[lang]}
             </h2>
             <p className="text-xs md:text-sm text-stone-700 italic max-w-xl mx-auto leading-relaxed">
-              "{run.description}"
+              "{run.description[lang]}"
             </p>
           </div>
 
@@ -109,22 +112,22 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
               <div>
                 <h3 className="metal-header">
                   <Scroll size={16} className="inline mr-2 -mt-1" />
-                  Origin
+                  {t.origin}
                 </h3>
                 <div className="pl-2 border-l border-sand-dark/40 flex flex-col gap-2">
                   <div>
-                    <span className="font-bold text-xs uppercase text-stone-600 block">Starting Scenario</span>
-                    <span className="font-semibold text-text-dark">{run.start.name}</span>
-                    <p className="text-xs text-stone-600 mt-0.5">{run.start.description}</p>
+                    <span className="font-bold text-xs uppercase text-stone-600 block">{t.startingScenario}</span>
+                    <span className="font-semibold text-text-dark">{run.start.name[lang]}</span>
+                    <p className="text-xs text-stone-600 mt-0.5">{run.start.description[lang]}</p>
                   </div>
                   <div className="grid grid-cols-2 gap-2 mt-1">
                     <div>
-                      <span className="font-bold text-xs uppercase text-stone-600 block">Race</span>
-                      <span className="font-semibold text-text-dark">{run.race.name}</span>
+                      <span className="font-bold text-xs uppercase text-stone-600 block">{t.race}</span>
+                      <span className="font-semibold text-text-dark">{run.race.name[lang]}</span>
                     </div>
                     <div>
-                      <span className="font-bold text-xs uppercase text-stone-600 block">Squad size</span>
-                      <span className="font-semibold text-text-dark">{run.startingSquad}</span>
+                      <span className="font-bold text-xs uppercase text-stone-600 block">{t.squadSize}</span>
+                      <span className="font-semibold text-text-dark">{run.startingSquad[lang]}</span>
                     </div>
                   </div>
                 </div>
@@ -134,18 +137,18 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
               <div>
                 <h3 className="metal-header">
                   <User size={16} className="inline mr-2 -mt-1" />
-                  Identity
+                  {t.identity}
                 </h3>
                 <div className="pl-2 border-l border-sand-dark/40 flex flex-col gap-2">
                   <div>
-                    <span className="font-bold text-xs uppercase text-stone-600 block">Archetype</span>
-                    <span className="font-semibold text-text-dark">{run.archetype.name}</span>
-                    <p className="text-xs text-stone-600 mt-0.5">{run.archetype.description}</p>
+                    <span className="font-bold text-xs uppercase text-stone-600 block">{t.archetype}</span>
+                    <span className="font-semibold text-text-dark">{run.archetype.name[lang]}</span>
+                    <p className="text-xs text-stone-600 mt-0.5">{run.archetype.description[lang]}</p>
                   </div>
                   <div>
-                    <span className="font-bold text-xs uppercase text-stone-600 block">Profession / Lifestyle</span>
-                    <span className="font-semibold text-text-dark">{run.profession.name}</span>
-                    <p className="text-xs text-stone-600 mt-0.5">{run.profession.description}</p>
+                    <span className="font-bold text-xs uppercase text-stone-600 block">{t.profession}</span>
+                    <span className="font-semibold text-text-dark">{run.profession.name[lang]}</span>
+                    <p className="text-xs text-stone-600 mt-0.5">{run.profession.description[lang]}</p>
                   </div>
                 </div>
               </div>
@@ -154,21 +157,21 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
               <div>
                 <h3 className="metal-header">
                   <Sword size={16} className="inline mr-2 -mt-1" />
-                  Combat & Gear
+                  {t.combat}
                 </h3>
                 <div className="pl-2 border-l border-sand-dark/40 grid grid-cols-2 gap-4">
                   <div>
-                    <span className="font-bold text-xs uppercase text-stone-600 block">Primary Weapon</span>
-                    <span className="font-semibold text-text-dark">{run.weapon.name}</span>
-                    <span className="text-xxs uppercase bg-stone-300/60 px-1 py-0.5 rounded block w-max mt-1 text-stone-700">
-                      Class: {run.weapon.type}
+                    <span className="font-bold text-xs uppercase text-stone-600 block">{t.primaryWeapon}</span>
+                    <span className="font-semibold text-text-dark">{run.weapon.name[lang]}</span>
+                    <span className="text-xxs uppercase bg-stone-300/60 px-1 py-0.5 rounded block w-max mt-1 text-stone-700 font-monospace">
+                      Class: {run.weapon.type[lang]}
                     </span>
                   </div>
                   <div>
-                    <span className="font-bold text-xs uppercase text-stone-600 block">Armor Class</span>
-                    <span className="font-semibold text-text-dark">{run.armor.name}</span>
-                    <span className="text-xxs uppercase bg-stone-300/60 px-1 py-0.5 rounded block w-max mt-1 text-stone-700">
-                      Weight: {run.armor.type}
+                    <span className="font-bold text-xs uppercase text-stone-600 block">{t.armorClass}</span>
+                    <span className="font-semibold text-text-dark">{run.armor.name[lang]}</span>
+                    <span className="text-xxs uppercase bg-stone-300/60 px-1 py-0.5 rounded block w-max mt-1 text-stone-700 font-monospace">
+                      Weight: {run.armor.type[lang]}
                     </span>
                   </div>
                 </div>
@@ -178,18 +181,18 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
               <div>
                 <h3 className="metal-header">
                   <Shield size={16} className="inline mr-2 -mt-1" />
-                  Wasteland Politics
+                  {t.politics}
                 </h3>
                 <div className="pl-2 border-l border-sand-dark/40 flex flex-col gap-3">
                   <div>
-                    <span className="font-bold text-xs uppercase text-green-700 block">Allied Faction</span>
-                    <span className="font-semibold text-text-dark">{run.alliedFaction.name}</span>
-                    <p className="text-xs text-stone-600 mt-0.5">{run.alliedFaction.description}</p>
+                    <span className="font-bold text-xs uppercase text-green-700 block">{t.alliedFaction}</span>
+                    <span className="font-semibold text-text-dark">{run.alliedFaction.name[lang]}</span>
+                    <p className="text-xs text-stone-600 mt-0.5">{run.alliedFaction.description[lang]}</p>
                   </div>
                   <div>
-                    <span className="font-bold text-xs uppercase text-red block">Hostile Faction</span>
-                    <span className="font-semibold text-text-dark">{run.enemyFaction.name}</span>
-                    <p className="text-xs text-stone-600 mt-0.5">{run.enemyFaction.description}</p>
+                    <span className="font-bold text-xs uppercase text-red block">{t.hostileFaction}</span>
+                    <span className="font-semibold text-text-dark">{run.enemyFaction.name[lang]}</span>
+                    <p className="text-xs text-stone-600 mt-0.5">{run.enemyFaction.description[lang]}</p>
                   </div>
                 </div>
               </div>
@@ -203,31 +206,31 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
               <div>
                 <h3 className="metal-header">
                   <Sliders size={16} className="inline mr-2 -mt-1" />
-                  Code of Conduct
+                  {t.codeOfConduct}
                 </h3>
                 <div className="pl-2 border-l border-sand-dark/40 flex flex-col gap-2">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     <div>
-                      <span className="font-bold uppercase text-stone-600 block">Recruitment</span>
-                      <span className="font-semibold text-text-dark">{run.rules.recruitment.name}</span>
+                      <span className="font-bold uppercase text-stone-600 block">{t.recruitment}</span>
+                      <span className="font-semibold text-text-dark">{run.rules.recruitment.name[lang]}</span>
                     </div>
                     <div>
-                      <span className="font-bold uppercase text-stone-600 block">Outposts</span>
-                      <span className="font-semibold text-text-dark">{run.rules.baseBuilding.name}</span>
+                      <span className="font-bold uppercase text-stone-600 block">{t.outposts}</span>
+                      <span className="font-semibold text-text-dark">{run.rules.baseBuilding.name[lang]}</span>
                     </div>
                     <div>
-                      <span className="font-bold uppercase text-stone-600 block">Economy</span>
-                      <span className="font-semibold text-text-dark">{run.rules.economy.name}</span>
+                      <span className="font-bold uppercase text-stone-600 block">{t.economy}</span>
+                      <span className="font-semibold text-text-dark">{run.rules.economy.name[lang]}</span>
                     </div>
                     <div>
-                      <span className="font-bold uppercase text-stone-600 block">Cybernetics</span>
-                      <span className="font-semibold text-text-dark">{run.rules.prosthetics.name}</span>
+                      <span className="font-bold uppercase text-stone-600 block">{t.cybernetics}</span>
+                      <span className="font-semibold text-text-dark">{run.rules.prosthetics.name[lang]}</span>
                     </div>
                   </div>
                   <div className="mt-2 pt-2 border-t border-sand-dark/20 text-xs">
-                    <span className="font-bold uppercase text-stone-600 block">Save Rule</span>
-                    <span className="font-semibold text-text-dark">{run.rules.saveRules.name}</span>
-                    <p className="text-xxs text-stone-600 italic mt-0.5">{run.rules.saveRules.description}</p>
+                    <span className="font-bold uppercase text-stone-600 block">{t.saveRule}</span>
+                    <span className="font-semibold text-text-dark">{run.rules.saveRules.name[lang]}</span>
+                    <p className="text-xxs text-stone-600 italic mt-0.5">{run.rules.saveRules.description[lang]}</p>
                   </div>
                 </div>
               </div>
@@ -236,13 +239,13 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
               <div>
                 <h3 className="metal-header">
                   <Skull size={16} className="inline mr-2 -mt-1" />
-                  Restrictions
+                  {t.restrictions}
                 </h3>
                 <ul className="pl-4 list-disc border-l border-sand-dark/40 flex flex-col gap-2.5 text-xs text-text-dark font-semibold">
                   {run.restrictions.map((r, i) => (
                     <li key={r.id || i} className="leading-snug">
-                      <span className="text-red font-bold">{r.name}:</span>{" "}
-                      <span className="font-medium text-stone-700">{r.description}</span>
+                      <span className="text-red font-bold">{r.name[lang]}:</span>{" "}
+                      <span className="font-medium text-stone-700">{r.description[lang]}</span>
                     </li>
                   ))}
                 </ul>
@@ -252,13 +255,13 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
               <div>
                 <h3 className="metal-header">
                   <Info size={16} className="inline mr-2 -mt-1" />
-                  Milestones
+                  {t.milestones}
                 </h3>
                 <ol className="pl-4 list-decimal border-l border-sand-dark/40 flex flex-col gap-2.5 text-xs text-text-dark font-semibold">
                   {run.objectives.map((o, i) => (
                     <li key={o.id || i} className="leading-snug">
-                      <span className="font-bold text-stone-800">{o.name}:</span>{" "}
-                      <span className="font-medium text-stone-700">{o.description}</span>
+                      <span className="font-bold text-stone-800">{o.name[lang]}:</span>{" "}
+                      <span className="font-medium text-stone-700">{o.description[lang]}</span>
                     </li>
                   ))}
                 </ol>
@@ -267,16 +270,16 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
               {/* Final Objective Block */}
               <div className="mt-2 bg-stone-300/40 p-4 border border-sand-dark/30 rounded-sm">
                 <h3 className="text-lg font-heading text-red flex items-center gap-2 mb-2">
-                  <Flame size={18} className="fill-current animate-pulse" />
-                  Final Objective
+                  <Flame size={18} className="fill-current animate-pulse text-red-light" />
+                  {t.finalObjective}
                 </h3>
                 <div className="pl-1">
-                  <span className="font-bold text-xs uppercase text-stone-700 block">The Destiny's Call</span>
+                  <span className="font-bold text-xs uppercase text-stone-700 block">{t.destinysCall}</span>
                   <span className="font-bold text-sm text-text-dark leading-tight block mt-1">
-                    {run.finalObjective.name}
+                    {run.finalObjective.name[lang]}
                   </span>
                   <p className="text-xs text-stone-700 mt-1.5 font-medium leading-relaxed">
-                    {run.finalObjective.description}
+                    {run.finalObjective.description[lang]}
                   </p>
                 </div>
               </div>
@@ -287,8 +290,8 @@ export const RunCard: React.FC<RunCardProps> = ({ run, onGenerateNew }) => {
 
           {/* Stamped Date or Seed Identifier */}
           <div className="text-right border-t border-dashed border-sand-dark pt-4 mt-8 flex justify-between items-center text-xxs text-stone-500 font-monospace uppercase">
-            <span>Kenshi Fate campaign contract</span>
-            <span>{run.dateStr ? `Daily Challenge: ${run.dateStr}` : `Seed: ${run.seed}`}</span>
+            <span>{t.campaignContract}</span>
+            <span>{run.dateStr ? `${t.dailyChallenge} ${run.dateStr}` : `${t.seed} ${run.seed}`}</span>
           </div>
 
         </div>

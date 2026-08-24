@@ -1,8 +1,12 @@
+export type Language = "en" | "pt" | "es";
+
+export type LocalizedString = Record<Language, string>;
+
 export type DifficultyLevel = 0 | 1 | 2 | 3; // 0: Wanderer, 1: Survivor, 2: Brutal, 3: Beep
 
 export interface TaggedItem {
   id: string;
-  name: string;
+  name: LocalizedString;
   weight?: number;
   tags?: string[];
   incompatibleTags?: string[];
@@ -13,45 +17,45 @@ export interface TaggedItem {
 export interface Race extends TaggedItem {}
 
 export interface Start extends TaggedItem {
-  description: string;
-  startingSquad: string;
+  description: LocalizedString;
+  startingSquad: LocalizedString;
   allowedRaces?: string[]; // If present, main character must be one of these
 }
 
 export interface Faction extends TaggedItem {
-  description: string;
+  description: LocalizedString;
 }
 
 export interface Weapon extends TaggedItem {
-  type: string; // Katana, Saber, Hacker, Heavy, Blunt, Polearm, Crossbow
+  type: LocalizedString; // Katana, Saber, Hacker, Heavy, Blunt, Polearm, Crossbow
 }
 
 export interface Armor extends TaggedItem {
-  type: string; // Clothing, Light, Medium, Heavy
+  type: LocalizedString; // Clothing, Light, Medium, Heavy
 }
 
 export interface Profession extends TaggedItem {
-  description: string;
+  description: LocalizedString;
 }
 
 export interface Archetype extends TaggedItem {
-  description: string;
+  description: LocalizedString;
   forcedAllies?: string[]; // Faction IDs or tags
   forcedEnemies?: string[]; // Faction IDs or tags
 }
 
 export interface RuleItem extends TaggedItem {
-  description: string;
+  description: LocalizedString;
   difficultyLevels: DifficultyLevel[];
 }
 
 export interface Restriction extends TaggedItem {
-  description: string;
+  description: LocalizedString;
   difficultyLevels: DifficultyLevel[];
 }
 
 export interface Objective extends TaggedItem {
-  description: string;
+  description: LocalizedString;
   difficultyLevels: DifficultyLevel[];
   isFinal?: boolean;
 }
@@ -70,12 +74,12 @@ export interface PlaythroughRun {
   dateStr?: string; // For daily challenges
   difficulty: {
     level: DifficultyLevel;
-    name: string;
-    description: string;
+    name: LocalizedString;
+    description: LocalizedString;
   };
   start: Start;
   race: Race;
-  startingSquad: string;
+  startingSquad: LocalizedString;
   archetype: Archetype;
   profession: Profession;
   weapon: Weapon;
@@ -92,6 +96,6 @@ export interface PlaythroughRun {
   restrictions: Restriction[];
   objectives: Objective[];
   finalObjective: Objective;
-  title: string;
-  description: string;
+  title: LocalizedString;
+  description: LocalizedString;
 }
