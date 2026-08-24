@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&family=Staatliches&display=swap');
+
+/* Kenshi Fate - Global Reset & Variables */
+:root {
+  /* Color Palette */
+  --color-coal: #110f0e;
+  --color-iron-dark: #1e1b18;
+  --color-iron-light: #36312b;
+  --color-rust: #c2593f;
+  --color-rust-dark: #913a25;
+  --color-sand-light: #e8ded1;
+  --color-sand-dark: #ccbba7;
+  --color-parchment: #f2e7d5;
+  --color-parchment-dark: #dfd0b8;
+  --color-red: #881c1c;
+  --color-red-light: #b92525;
+  --color-text-dark: #1e1a17;
+  --color-text-light: #e6dec9;
+  
+  /* Fonts */
+  --font-heading: 'Staatliches', sans-serif;
+  --font-typewriter: 'Special Elite', cursive;
+  --font-monospace: 'Courier Prime', monospace;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-coal);
+  color: var(--color-text-light);
+  font-family: var(--font-monospace);
+  line-height: 1.5;
+  font-size: 15px;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(194, 89, 63, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(54, 49, 43, 0.3) 0%, transparent 50%),
+    linear-gradient(to bottom, #110f0e 0%, #1a1614 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-coal);
+  border-left: 1px solid var(--color-iron-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-iron-light);
+  border: 2px solid var(--color-coal);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-rust);
+}
+
+/* Typography Customizations */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Focus States for Accessibility */
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-rust);
+  outline-offset: 4px;
+}
+
+/* Wasteland Steel Frame Containers */
+.iron-panel {
+  background-color: var(--color-iron-dark);
+  border: 2px solid var(--color-iron-light);
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.8),
+    0 10px 25px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.iron-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(194, 89, 63, 0.3), transparent);
+}
+
+/* Weathered Parchment Card Container */
+.parchment-contract {
+  background-color: var(--color-parchment);
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-sand-dark);
+  box-shadow: 
+    5px 5px 0px rgba(45, 39, 34, 0.5),
+    0px 10px 20px rgba(0, 0, 0, 0.4);
+  font-family: var(--font-typewriter);
+  position: relative;
+  padding: 2.5rem;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(194, 89, 63, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 80% 80%, rgba(45, 39, 34, 0.05) 0%, transparent 30%);
+}
+
+/* Double-borders and worn corners for paper */
+.parchment-contract-inner {
+  border: 1px double rgba(45, 39, 34, 0.3);
+  padding: 1.5rem;
+  height: 100%;
+}
+
+/* Metal Plates / Headers in Parchment */
+.metal-header {
+  font-family: var(--font-heading);
+  background-color: var(--color-iron-dark);
+  color: var(--color-sand-light);
+  padding: 0.5rem 1rem;
+  border-left: 4px solid var(--color-rust);
+  border-bottom: 1px solid var(--color-iron-light);
+  letter-spacing: 0.1em;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Worn Metal Buttons */
+.btn-metal {
+  background-color: var(--color-iron-dark);
+  color: var(--color-text-light);
+  border: 2px solid var(--color-iron-light);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all var(--transition-fast);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.btn-metal:hover {
+  background-color: var(--color-rust);
+  border-color: var(--color-rust);
+  color: var(--color-coal);
+  box-shadow: 0 0 12px rgba(194, 89, 63, 0.4);
+}
+
+.btn-metal:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+}
+
+.btn-metal-rust {
+  background-color: var(--color-rust-dark);
+  border-color: var(--color-rust);
+  font-size: 1.3rem;
+  padding: 1rem 2.5rem;
+}
+
+.btn-metal-rust:hover {
+  background-color: var(--color-rust);
+  color: var(--color-coal);
+  box-shadow: 0 0 15px rgba(194, 89, 63, 0.6);
+}
+
+/* Subtle Rivets for UI Containers */
+.rivet {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-iron-light);
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 
+    inset -1px -1px 2px rgba(0,0,0,0.8),
+    1px 1px 1px rgba(255,255,255,0.1);
+}
+
+.rivet-tl { top: 8px; left: 8px; }
+.rivet-tr { top: 8px; right: 8px; }
+.rivet-bl { bottom: 8px; left: 8px; }
+.rivet-br { bottom: 8px; right: 8px; }
+
+/* Status tags and difficulty display */
+.badge-diff {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  background-color: var(--color-iron-dark);
+  color: var(--color-sand-light);
+  border: 1px solid var(--color-iron-light);
+}
+
+.badge-diff-0 { border-color: #8b9bb4; color: #8b9bb4; } /* Wanderer - Slate Grey */
+.badge-diff-1 { border-color: #d1b46a; color: #d1b46a; } /* Survivor - Brass */
+.badge-diff-2 { border-color: var(--color-rust); color: var(--color-rust); } /* Brutal - Rust */
+.badge-diff-3 { border-color: var(--color-red-light); color: var(--color-red-light); } /* Beep - Crimson */
+
+/* Form inputs & Select overrides for Kenshi Look */
+.select-custom {
+  background-color: var(--color-iron-dark);
+  color: var(--color-text-light);
+  border: 2px solid var(--color-iron-light);
+  font-family: var(--font-monospace);
+  padding: 0.5rem;
+  width: 100%;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23c2593f' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 1.2rem;
+  border-radius: 0;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.select-custom:hover, .select-custom:focus {
+  border-color: var(--color-rust);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes stampReveal {
+  0% { transform: scale(3); opacity: 0; }
+  70% { transform: scale(0.9); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes sandSwirl {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+.anim-fade-in {
+  animation: fadeIn var(--transition-slow) forwards;
+}
+
+.anim-slide-up {
+  animation: slideUp var(--transition-slow) forwards;
+}
+
+/* Layout utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  width: 100%;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .parchment-contract {
+    padding: 1.5rem 1rem;
+  }
+  
+  .parchment-contract-inner {
+    padding: 1rem 0.5rem;
+  }
+
+  .btn-metal-rust {
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* Accessibility: respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

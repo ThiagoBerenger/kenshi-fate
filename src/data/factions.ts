@@ -1,0 +1,75 @@
+import type { Faction } from "../engine/types";
+
+export const factions: Faction[] = [
+  {
+    id: "holy_nation",
+    name: "The Holy Nation",
+    description: "Religious zealots who worship Okran, hate Skeletons, and restrict non-humans.",
+    tags: ["holy_nation_faction", "anti_skeleton", "anti_prosthetic"],
+    incompatibleTags: ["skeleton", "robotic", "requires_prosthetics"],
+    contentPack: "vanilla",
+  },
+  {
+    id: "united_cities",
+    name: "The United Cities",
+    description: "An empire ruled by corrupt nobles where poverty is a crime and slavery is legal.",
+    tags: ["united_cities_faction", "pro_slavery"],
+    contentPack: "vanilla",
+  },
+  {
+    id: "shek_kingdom",
+    name: "The Shek Kingdom",
+    description: "Proud warriors seeking honorable battle, currently ruled by the reformist Stone Golem.",
+    tags: ["shek_kingdom_faction", "warrior_culture"],
+    contentPack: "vanilla",
+  },
+  {
+    id: "anti_slavers",
+    name: "The Anti-Slavers",
+    description: "A martial arts rebellion led by the legendary Tinfist, dedicated to destroying slavery.",
+    tags: ["anti_slavers_faction", "anti_slavery", "pro_skeleton"],
+    contentPack: "vanilla",
+  },
+  {
+    id: "flotsam_ninjas",
+    name: "Flotsam Ninjas",
+    description: "Runaway women and rebels who escaped the Holy Nation, hiding in the Hidden Forest.",
+    tags: ["flotsam_ninjas_faction", "anti_holy_nation"],
+    contentPack: "vanilla",
+  },
+  {
+    id: "shinobi_thieves",
+    name: "Shinobi Thieves",
+    description: "A shadowy guild operating from towers inside major towns, providing smuggling services.",
+    tags: ["shinobi_thieves_faction", "thievery"],
+    contentPack: "vanilla",
+  },
+  {
+    id: "tech_hunters",
+    name: "Tech Hunters",
+    description: "Archeologists and explorers searching ancient ruins to reclaim lost technology.",
+    tags: ["tech_hunters_faction", "explorer_culture"],
+    contentPack: "vanilla",
+  },
+  {
+    id: "rebel_farmers",
+    name: "Rebel Farmers",
+    description: "Impoverished outlaws led by Simion, fighting against the Empire's oppressive taxes.",
+    tags: ["rebel_farmers_faction", "anti_united_cities"],
+    contentPack: "vanilla",
+  },
+  {
+    id: "mongrel",
+    name: "Mongrel Shinobi / Outlaws",
+    description: "The free city of Mongrel, hiding in the Fog Islands, home of outcast beep.",
+    tags: ["mongrel_faction"],
+    contentPack: "vanilla",
+  },
+  {
+    id: "skin_bandits",
+    name: "Skin Bandits",
+    description: "A bizarre cult of skeletons led by Savant, who skin humans to wear their hides.",
+    tags: ["skin_bandits_faction", "skeleton_bandits", "evil_skeleton"],
+    contentPack: "vanilla",
+  },
+];
