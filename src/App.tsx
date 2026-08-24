@@ -198,6 +198,13 @@ function App() {
             <div className="rivet rivet-bl"></div>
             <div className="rivet rivet-br"></div>
 
+            <img 
+              src="/kenshi-fatee-logo.webp" 
+              alt="Kenshi Fate" 
+              className="select-none mb-6 max-h-24 md:max-h-28 w-auto block"
+              style={{ display: "block" }}
+            />
+
             <h2 className="text-2xl font-heading text-rust mb-2">
               {t.heroSubtitle}
             </h2>

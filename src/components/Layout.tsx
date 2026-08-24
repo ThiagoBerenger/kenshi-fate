@@ -77,13 +77,13 @@ export const Layout: React.FC<LayoutProps> = ({
         </div>
 
         <div className="flex flex-col items-center">
-          <img 
-            src="/kenshi-fatee-logo.webp" 
-            alt="Kenshi Fate Logo" 
+          <h1 
             onClick={onNavigateHome}
-            className="cursor-pointer transition-all duration-150 hover:scale-105 active:scale-95 select-none"
-            style={{ maxHeight: "95px", width: "auto", display: "block", marginBottom: "0.25rem" }}
-          />
+            className="text-4xl md:text-5xl font-extrabold tracking-widest text-rust hover:text-rust-light cursor-pointer select-none transition-colors duration-150"
+            style={{ textShadow: "3px 3px 0px rgba(0,0,0,0.8)" }}
+          >
+            {t.heroTitle}
+          </h1>
           <p className="font-heading text-lg md:text-xl tracking-wider text-sand-light mt-2 uppercase">
             {t.heroSubtitle}
           </p>
