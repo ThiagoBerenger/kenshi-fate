@@ -280,23 +280,6 @@ export const RunCard: React.FC<RunCardProps> = ({ run, lang, onGenerateNew }) =>
                 </ol>
               </div>
 
-              {/* Final Objective Block */}
-              <div className="mt-2 bg-stone-300/40 p-4 border border-sand-dark/30 rounded-sm">
-                <h3 className="text-lg font-heading text-red flex items-center gap-2 mb-2">
-                  <Flame size={18} className="fill-current animate-pulse text-red-light" />
-                  {t.finalObjective}
-                </h3>
-                <div className="pl-1">
-                  <span className="font-bold text-xs uppercase text-stone-700 block">{t.destinysCall}</span>
-                  <span className="font-bold text-sm text-text-dark leading-tight block mt-1">
-                    {run.finalObjective.name[lang]}
-                  </span>
-                  <p className="text-xs text-stone-700 mt-1.5 font-medium leading-relaxed">
-                    {run.finalObjective.description[lang]}
-                  </p>
-                </div>
-              </div>
-
             </div>
 
           </div>
@@ -307,6 +290,23 @@ export const RunCard: React.FC<RunCardProps> = ({ run, lang, onGenerateNew }) =>
               <Map run={run} lang={lang} />
             </div>
           )}
+
+          {/* Final Objective Block at the end of the journey */}
+          <div className="mt-6 bg-stone-300/40 p-5 border border-sand-dark/30 rounded-sm">
+            <h3 className="text-xl font-heading text-red flex items-center gap-2 mb-3">
+              <Flame size={20} className="fill-current animate-pulse text-red-light" />
+              {t.finalObjective}
+            </h3>
+            <div className="pl-1">
+              <span className="font-bold text-xs uppercase text-stone-700 block">{t.destinysCall}</span>
+              <span className="font-bold text-base text-text-dark leading-tight block mt-1">
+                {run.finalObjective.name[lang]}
+              </span>
+              <p className="text-sm text-stone-700 mt-2 font-medium leading-relaxed">
+                {run.finalObjective.description[lang]}
+              </p>
+            </div>
+          </div>
 
           {/* Stamped Date or Seed Identifier */}
           <div className="text-right border-t border-dashed border-sand-dark pt-4 mt-8 flex justify-between items-center text-xxs text-stone-500 font-monospace uppercase">
