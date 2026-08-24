@@ -190,7 +190,7 @@ export const Map: React.FC<MapProps> = ({ run, lang }) => {
         style={{ backgroundColor: "#dfd0b8" }}
       >
         {/* Map Header */}
-        <div className="flex items-center justify-between border-b border-stone-400/40 p-2 bg-stone-300/10 text-xxs font-monospace uppercase text-stone-750 font-bold">
+        <div className="flex items-center justify-between border-b border-sand-dark/40 p-2 bg-coal/80 text-xxs font-monospace uppercase text-sand-light font-bold">
           <span>🗺️ {t.journey}</span>
           <span>Kenshi Continent</span>
         </div>
@@ -255,7 +255,7 @@ export const Map: React.FC<MapProps> = ({ run, lang }) => {
                 </div>
 
                 {/* Desktop static label */}
-                <span className="hidden sm:block absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[9px] font-bold text-stone-900 bg-parchment/80 px-1 border border-sand-dark/30 rounded-sm whitespace-nowrap pointer-events-none font-monospace select-none">
+                <span className="hidden sm:block absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[9px] font-bold text-stone-900 px-1 border border-sand-dark/30 rounded-sm whitespace-nowrap pointer-events-none font-monospace select-none" style={{ backgroundColor: "rgba(242, 231, 213, 0.95)" }}>
                   {marker.name}
                 </span>
 
@@ -263,6 +263,7 @@ export const Map: React.FC<MapProps> = ({ run, lang }) => {
                 {isHovered && (
                   <div 
                     className={tooltipClass}
+                    style={{ backgroundColor: "var(--color-parchment)" }}
                     onClick={(e) => e.stopPropagation()}
                   >
                     <div className="font-bold text-[9px] tracking-wider text-rust-dark uppercase border-b border-sand-dark/40 pb-0.5 mb-1">
@@ -290,7 +291,7 @@ export const Map: React.FC<MapProps> = ({ run, lang }) => {
       </div>
 
       {/* Map Attribution */}
-      <div className="flex justify-between items-center px-1 text-[10px] font-monospace text-stone-500">
+      <div className="flex justify-between items-center px-1 text-[10px] font-monospace text-sand-dark/70">
         <span>Map source / credits: Kenshi Location Map (Kenshi Wiki / Fandom, CC BY-SA 3.0)</span>
         {import.meta.env.DEV && (
           <span className="text-rust font-bold">(Dev Mode: Click map for coordinates)</span>
