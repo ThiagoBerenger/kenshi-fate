@@ -184,109 +184,114 @@ export const Map: React.FC<MapProps> = ({ run, lang }) => {
 
   return (
     <div className="relative w-full flex flex-col gap-2">
-      {/* Map Container */}
-      <div 
-        className="relative w-full overflow-hidden border border-sand-dark/50 bg-parchment-dark shadow-md select-none"
-        style={{ backgroundColor: "#dfd0b8" }}
-      >
-        {/* Map Header */}
-        <div className="flex items-center justify-between border-b border-sand-dark/40 p-2 bg-coal/80 text-xxs font-monospace uppercase text-sand-light font-bold">
-          <span>🗺️ {t.journey}</span>
-          <span>Kenshi Continent</span>
-        </div>
+      {/* Scrollable Container on Mobile to Pan Map */}
+      <div className="w-full overflow-x-auto scrollbar-thin rounded-sm">
+        {/* Map Container */}
+        <div 
+          className="relative min-w-[650px] sm:min-w-0 w-full overflow-hidden border border-sand-dark/50 bg-parchment-dark shadow-md select-none"
+          style={{ backgroundColor: "#dfd0b8" }}
+        >
+          {/* Map Header */}
+          <div className="flex items-center justify-between border-b border-sand-dark/40 p-2 bg-coal/80 text-xxs font-monospace uppercase text-sand-light font-bold">
+            <span>🗺️ {t.journey}</span>
+            <span className="sm:hidden text-rust animate-pulse">(Arrastar ↔ Pan)</span>
+            <span className="hidden sm:inline">Kenshi Continent</span>
+          </div>
 
-        {/* Map Image & Overlays */}
-        <div className="relative w-full" onClick={handleMapClick}>
-          {/* Main Map Background */}
-          <img 
-            src="/assets/maps/kenshi-world-map.jpg" 
-            alt="Kenshi World Map" 
-            className="w-full h-auto block"
-            loading="lazy"
-          />
+          {/* Map Image & Overlays */}
+          <div className="relative w-full" onClick={handleMapClick}>
+            {/* Main Map Background */}
+            <img 
+              src="/assets/maps/kenshi-world-map.jpg" 
+              alt="Kenshi World Map" 
+              className="w-full h-auto block"
+              loading="lazy"
+            />
 
-          {/* Dotted Journey Path Overlay */}
-          {journeyPoints.length >= 2 && (
-            <svg 
-              viewBox="0 0 100 100" 
-              preserveAspectRatio="none" 
-              className="absolute inset-0 w-full h-full pointer-events-none"
-            >
-              <path 
-                d={getBezierPath(journeyPoints)} 
-                fill="none" 
-                stroke="#913a25" 
-                strokeWidth="2.5" 
-                strokeDasharray="4 4" 
-                strokeLinecap="round" 
-                style={{ filter: "drop-shadow(0px 1px 1px rgba(0,0,0,0.45))" }}
-              />
-            </svg>
-          )}
+            {/* Dotted Journey Path Overlay */}
+            {journeyPoints.length >= 2 && (
+              <svg 
+                viewBox="0 0 100 100" 
+                preserveAspectRatio="none" 
+                className="absolute inset-0 w-full h-full pointer-events-none"
+              >
+                <path 
+                  d={getBezierPath(journeyPoints)} 
+                  fill="none" 
+                  stroke="#913a25" 
+                  strokeWidth="2.5" 
+                  strokeDasharray="4 4" 
+                  strokeLinecap="round" 
+                  style={{ filter: "drop-shadow(0px 1px 1px rgba(0,0,0,0.45))" }}
+                />
+              </svg>
+            )}
 
-          {/* Markers overlay */}
-          {markers.map((marker) => {
-            const isHovered = activeTooltip === marker.id;
-            
-            // Align tooltips relative to marker position to avoid edge clipping
-            const tooltipClass = `absolute bottom-full mb-2 w-44 bg-parchment text-text-dark border border-sand-dark p-2.5 shadow-lg z-50 text-left rounded-sm font-monospace pointer-events-auto transition-all duration-150 ${
-              marker.x < 25 
+            {/* Markers overlay */}
+            {markers.map((marker) => {
+              const isHovered = activeTooltip === marker.id;
+              
+              // Align tooltips relative to marker position to avoid edge clipping
+              const verticalClass = marker.y < 30 ? "top-full mt-2" : "bottom-full mb-2";
+              const horizontalClass = marker.x < 25 
                 ? "left-0" 
                 : marker.x > 75 
                   ? "right-0" 
-                  : "left-1/2 -translate-x-1/2"
-            }`;
+                  : "left-1/2 -translate-x-1/2";
+              
+              const tooltipClass = `absolute ${verticalClass} w-44 bg-parchment text-text-dark border border-sand-dark p-2.5 shadow-lg z-50 text-left rounded-sm font-monospace pointer-events-auto transition-all duration-150 ${horizontalClass}`;
 
-            return (
-              <div
-                key={marker.id}
-                className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10"
-                style={{ left: `${marker.x}%`, top: `${marker.y}%`, zIndex: isHovered ? 40 : 10 }}
-                onMouseEnter={() => setActiveTooltip(marker.id)}
-                onMouseLeave={() => setActiveTooltip(null)}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveTooltip(activeTooltip === marker.id ? null : marker.id);
-                }}
-              >
-                {/* Marker Emblem */}
-                <div className="hover:scale-115 active:scale-95 transition-transform duration-100 flex items-center justify-center">
-                  {renderMarkerIcon(marker.type)}
-                </div>
-
-                {/* Desktop static label */}
-                <span className="hidden sm:block absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[9px] font-bold text-stone-900 px-1 border border-sand-dark/30 rounded-sm whitespace-nowrap pointer-events-none font-monospace select-none" style={{ backgroundColor: "rgba(242, 231, 213, 0.95)" }}>
-                  {marker.name}
-                </span>
-
-                {/* Tooltip Overlay */}
-                {isHovered && (
-                  <div 
-                    className={tooltipClass}
-                    style={{ backgroundColor: "var(--color-parchment)" }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <div className="font-bold text-[9px] tracking-wider text-rust-dark uppercase border-b border-sand-dark/40 pb-0.5 mb-1">
-                      {marker.labelText}
-                    </div>
-                    <div className="font-bold text-xs text-stone-900 leading-tight">
-                      {marker.name}
-                    </div>
-                    {marker.region && (
-                      <div className="text-[10px] text-stone-600 font-medium mt-0.5">
-                        {marker.region}
-                      </div>
-                    )}
-                    {marker.subText && (
-                      <div className="text-[9px] italic text-stone-750 font-bold border-t border-dashed border-sand-dark/30 pt-1 mt-1">
-                        {marker.subText}
-                      </div>
-                    )}
+              return (
+                <div
+                  key={marker.id}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10"
+                  style={{ left: `${marker.x}%`, top: `${marker.y}%`, zIndex: isHovered ? 40 : 10 }}
+                  onMouseEnter={() => setActiveTooltip(marker.id)}
+                  onMouseLeave={() => setActiveTooltip(null)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveTooltip(activeTooltip === marker.id ? null : marker.id);
+                  }}
+                >
+                  {/* Marker Emblem */}
+                  <div className="hover:scale-115 active:scale-95 transition-transform duration-100 flex items-center justify-center">
+                    {renderMarkerIcon(marker.type)}
                   </div>
-                )}
-              </div>
-            );
-          })}
+
+                  {/* Desktop static label */}
+                  <span className="hidden sm:block absolute top-full left-1/2 -translate-x-1/2 mt-1 text-[9px] font-bold text-stone-900 px-1 border border-sand-dark/30 rounded-sm whitespace-nowrap pointer-events-none font-monospace select-none" style={{ backgroundColor: "rgba(242, 231, 213, 0.95)" }}>
+                    {marker.name}
+                  </span>
+
+                  {/* Tooltip Overlay */}
+                  {isHovered && (
+                    <div 
+                      className={tooltipClass}
+                      style={{ backgroundColor: "var(--color-parchment)" }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="font-bold text-[9px] tracking-wider text-rust-dark uppercase border-b border-sand-dark/40 pb-0.5 mb-1">
+                        {marker.labelText}
+                      </div>
+                      <div className="font-bold text-xs text-stone-900 leading-tight">
+                        {marker.name}
+                      </div>
+                      {marker.region && (
+                        <div className="text-[10px] text-stone-600 font-medium mt-0.5">
+                          {marker.region}
+                        </div>
+                      )}
+                      {marker.subText && (
+                        <div className="text-[9px] italic text-stone-750 font-bold border-t border-dashed border-sand-dark/30 pt-1 mt-1">
+                          {marker.subText}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
