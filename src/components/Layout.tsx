@@ -16,10 +16,10 @@ const GithubIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
   </svg>
 );
 
-const EMOJI_BY_LANG: Record<Language, string> = {
-  en: "🇬🇧",
-  pt: "🇧🇷",
-  es: "🇪🇸",
+const FLAG_SRC_BY_LANG: Record<Language, string> = {
+  en: "https://flagcdn.com/gb.svg",
+  pt: "https://flagcdn.com/br.svg",
+  es: "https://flagcdn.com/es.svg",
 };
 
 interface LayoutProps {
@@ -59,9 +59,19 @@ export const Layout: React.FC<LayoutProps> = ({
                   : "opacity-40 hover:opacity-100 filter grayscale hover:grayscale-0"
               }`}
               title={l.toUpperCase()}
-              style={{ lineHeight: "1" }}
+              style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
             >
-              {EMOJI_BY_LANG[l]}
+              <img
+                src={FLAG_SRC_BY_LANG[l]}
+                alt={`${l.toUpperCase()} Flag`}
+                style={{
+                  width: "24px",
+                  height: "16px",
+                  display: "block",
+                  objectFit: "cover",
+                  borderRadius: "1px",
+                }}
+              />
             </button>
           ))}
         </div>
