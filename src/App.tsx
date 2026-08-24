@@ -201,8 +201,8 @@ function App() {
             <img 
               src="/kenshi-fatee-logo.webp" 
               alt="Kenshi Fate" 
-              className="select-none mb-4 max-h-14 md:max-h-16 w-auto block"
-              style={{ display: "block" }}
+              className="select-none mb-4 block"
+              style={{ maxHeight: "50px", width: "auto", height: "auto", display: "block" }}
             />
 
             <h2 className="text-2xl font-heading text-rust mb-2">
