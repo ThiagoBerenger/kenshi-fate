@@ -147,32 +147,35 @@ export const Map: React.FC<MapProps> = ({ run, lang }) => {
     switch (type) {
       case "start":
         return (
-          <svg viewBox="0 0 24 24" className="w-6 h-6 text-stone-900 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round">
-            <path d="M5 5 C 10 10, 14 14, 19 19 M19 5 C 15 10, 10 14, 5 19" />
-            <circle cx="12" cy="12" r="9" strokeWidth="1.5" strokeDasharray="3 3" />
+          <svg viewBox="0 0 24 24" className="w-8 h-8 text-rust drop-shadow-[0_2.5px_4px_rgba(0,0,0,0.6)]" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round">
+            {/* Sonar pulse ring */}
+            <circle cx="12" cy="12" r="11" stroke="currentColor" strokeWidth="1.5" className="animate-ping opacity-40" />
+            {/* Solid mask background */}
+            <circle cx="12" cy="12" r="9.5" fill="#fbf9f4" stroke="#110f0e" strokeWidth="2" />
+            <path d="M7.5 7.5 L16.5 16.5 M16.5 7.5 L7.5 16.5" stroke="currentColor" />
           </svg>
         );
       case "danger":
         return (
-          <svg viewBox="0 0 24 24" className="w-6 h-6 text-red-800 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
-            <polygon points="12,3 22,20 2,20" fill="currentColor" fillOpacity="0.1" />
+          <svg viewBox="0 0 24 24" className="w-6 h-6 text-red drop-shadow-[0_2px_2.5px_rgba(0,0,0,0.5)]" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
+            <polygon points="12,3 22,20 2,20" fill="#fbf9f4" strokeWidth="2.5" />
             <line x1="12" y1="9" x2="12" y2="14" strokeWidth="3.5" />
             <circle cx="12" cy="17" r="1.5" fill="currentColor" />
           </svg>
         );
       case "final_target":
         return (
-          <svg viewBox="0 0 24 24" className="w-8 h-8 text-red-950 drop-shadow-[0_2px_3px_rgba(0,0,0,0.6)] animate-pulse" fill="none" stroke="currentColor" strokeWidth="3">
-            <circle cx="12" cy="12" r="9" strokeWidth="3" />
-            <circle cx="12" cy="12" r="5" strokeWidth="1.5" strokeDasharray="2 2" />
+          <svg viewBox="0 0 24 24" className="w-8 h-8 text-red-light drop-shadow-[0_2.5px_4px_rgba(0,0,0,0.6)] animate-pulse" fill="none" stroke="currentColor" strokeWidth="3">
+            <circle cx="12" cy="12" r="9" fill="#fbf9f4" strokeWidth="2.5" />
+            <circle cx="12" cy="12" r="5.5" strokeWidth="1.2" strokeDasharray="2 2" />
             <polygon points="12,7 13.5,10.5 17,11 14.5,13.5 15,17 12,15 9,17 9.5,13.5 7,11 10.5,10.5" fill="currentColor" />
           </svg>
         );
       case "objective":
       default:
         return (
-          <svg viewBox="0 0 24 24" className="w-5 h-5 text-stone-850 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" fill="none" stroke="currentColor" strokeWidth="3">
-            <circle cx="12" cy="12" r="7" />
+          <svg viewBox="0 0 24 24" className="w-5 h-5 text-stone-800 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" fill="none" stroke="currentColor" strokeWidth="3">
+            <circle cx="12" cy="12" r="7" fill="#fbf9f4" strokeWidth="2.5" />
             <circle cx="12" cy="12" r="2.5" fill="currentColor" />
           </svg>
         );
