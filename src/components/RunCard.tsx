@@ -169,7 +169,7 @@ export const RunCard: React.FC<RunCardProps> = ({ run, lang, onGenerateNew }) =>
                       style={{ width: "40px", height: "40px", filter: "brightness(0.12)", opacity: "0.85" }} 
                     />
                   )}
-                  <div className="grid grid-cols-2 gap-4 flex-grow">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
                     <div>
                       <span className="font-bold text-xs uppercase text-stone-600 block">{t.primaryWeapon}</span>
                       <span className="font-semibold text-text-dark">{run.weapon.name[lang]}</span>
@@ -196,36 +196,16 @@ export const RunCard: React.FC<RunCardProps> = ({ run, lang, onGenerateNew }) =>
                 </h3>
                 <div className="pl-2 border-l border-sand-dark/40 flex flex-col gap-4">
                   {/* Allied Faction */}
-                  <div className="flex items-start gap-3">
-                    {run.alliedFaction.icon && (
-                      <img 
-                        src={run.alliedFaction.icon} 
-                        alt="" 
-                        className="w-10 h-10 object-contain"
-                        style={{ width: "40px", height: "40px", filter: "brightness(0.12)", opacity: "0.85" }} 
-                      />
-                    )}
-                    <div>
-                      <span className="font-bold text-xs uppercase text-green-700 block">{t.alliedFactionHeader}</span>
-                      <span className="font-semibold text-text-dark">{run.alliedFaction.name[lang]}</span>
-                      <p className="text-xs text-stone-600 mt-0.5 leading-tight">{run.alliedFaction.description[lang]}</p>
-                    </div>
+                  <div>
+                    <span className="font-bold text-xs uppercase text-green-700 block">{t.alliedFactionHeader}</span>
+                    <span className="font-semibold text-text-dark">{run.alliedFaction.name[lang]}</span>
+                    <p className="text-xs text-stone-600 mt-0.5 leading-tight">{run.alliedFaction.description[lang]}</p>
                   </div>
                   {/* Enemy Faction */}
-                  <div className="flex items-start gap-3">
-                    {run.enemyFaction.icon && (
-                      <img 
-                        src={run.enemyFaction.icon} 
-                        alt="" 
-                        className="w-10 h-10 object-contain"
-                        style={{ width: "40px", height: "40px", filter: "brightness(0.12)", opacity: "0.85" }} 
-                      />
-                    )}
-                    <div>
-                      <span className="font-bold text-xs uppercase text-red block">{t.enemyFactionHeader}</span>
-                      <span className="font-semibold text-text-dark">{run.enemyFaction.name[lang]}</span>
-                      <p className="text-xs text-stone-600 mt-0.5 leading-tight">{run.enemyFaction.description[lang]}</p>
-                    </div>
+                  <div>
+                    <span className="font-bold text-xs uppercase text-red block">{t.enemyFactionHeader}</span>
+                    <span className="font-semibold text-text-dark">{run.enemyFaction.name[lang]}</span>
+                    <p className="text-xs text-stone-600 mt-0.5 leading-tight">{run.enemyFaction.description[lang]}</p>
                   </div>
                 </div>
               </div>

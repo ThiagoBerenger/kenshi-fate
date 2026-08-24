@@ -1,12 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-  <!-- Imperial Crest: stylized crown/scales representing money and empire -->
-  <path d="M12 48 L16 20 L32 30 L48 20 L52 48 Z" stroke-width="3" fill="currentColor" fill-opacity="0.1" />
-  <!-- Crown peaks -->
-  <circle cx="16" cy="20" r="3" fill="currentColor" />
-  <circle cx="32" cy="30" r="3" fill="currentColor" />
-  <circle cx="48" cy="20" r="3" fill="currentColor" />
-  <!-- Center line -->
-  <path d="M32 30 L32 48" stroke-width="2" />
-  <!-- Base platform -->
-  <path d="M8 48 L56 48" stroke-width="4" />
+  <!-- Stylized Dove in Flight representing the United Cities (Ironic Pax) -->
+  <!-- Body/Tail of the bird -->
+  <path d="M16 36 C22 36, 28 32, 36 32 C42 32, 48 35, 52 32 L46 38 C42 42, 32 44, 26 44 L16 36 Z" fill="currentColor" fill-opacity="0.1" />
+  
+  <!-- Head of the dove -->
+  <circle cx="48" cy="30" r="4" fill="currentColor" />
+  
+  <!-- Beak -->
+  <path d="M52 30 L56 28 L51 32" stroke-width="2" fill="currentColor" />
+
+  <!-- Upper wing -->
+  <path d="M32 32 C26 22, 18 10, 10 16 C14 24, 22 28, 28 32" stroke-width="3" />
+  <path d="M22 22 C18 16, 14 12, 12 16" stroke-width="2" />
+
+  <!-- Lower wing / tail feathers -->
+  <path d="M20 38 C16 44, 12 50, 8 48 C10 42, 14 38, 16 36" stroke-width="2.5" />
+
+  <!-- Olive Branch in beak -->
+  <path d="M52 28 Q54 20, 58 18" stroke-width="2" />
+  <!-- Leaf 1 -->
+  <path d="M53 23 C51 21, 53 19, 55 21 Z" fill="currentColor" />
+  <!-- Leaf 2 -->
+  <path d="M57 20 C55 18, 57 16, 59 18 Z" fill="currentColor" />
 </svg>

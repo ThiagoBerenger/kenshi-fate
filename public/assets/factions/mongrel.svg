@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Mongrel: A hidden city in a canyon/crater surrounded by Fog -->
+  <!-- Canyon peaks on the sides -->
+  <path d="M8 48 L18 24 L28 44 L36 32 L46 48" stroke-width="3" />
+  <path d="M46 48 L56 20 L60 48" stroke-width="3" />
+  
+  <!-- City towers/buildings inside the crater/valley -->
+  <rect x="26" y="36" width="6" height="12" fill="currentColor" fill-opacity="0.2" stroke-width="2" />
+  <rect x="34" y="32" width="8" height="16" fill="currentColor" fill-opacity="0.2" stroke-width="2" />
+  
+  <!-- Fog swirls at the bottom/middle -->
+  <path d="M12 44 C20 40, 24 48, 32 44 C40 40, 44 48, 52 44" stroke-width="2.5" stroke-dasharray="2 2" />
+  <path d="M6 52 C16 48, 20 56, 32 52 C44 48, 48 56, 58 52" stroke-width="3" />
+</svg>

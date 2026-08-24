@@ -130,6 +130,25 @@ input:focus-visible {
   height: 100%;
 }
 
+@media (max-width: 768px) {
+  .parchment-contract {
+    padding: 1.25rem;
+  }
+  .parchment-contract-inner {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .parchment-contract {
+    padding: 0.75rem;
+  }
+  .parchment-contract-inner {
+    padding: 0.75rem;
+  }
+}
+
+
 /* Metal Plates / Headers in Parchment */
 .metal-header {
   font-family: var(--font-heading);
@@ -301,15 +320,27 @@ input:focus-visible {
 .justify-center { justify-content: center; }
 .justify-between { justify-content: space-between; }
 .flex-grow { flex-grow: 1; }
+.block { display: block; }
+.w-max { width: max-content; }
 
 .grid { display: grid; }
 .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
 .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (min-width: 768px) {
   .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .md\:w-auto { width: auto; }
+  .md\:p-6 { padding: 1.5rem; }
+  .md\:text-5xl { font-size: 3rem; }
+  .md\:text-4xl { font-size: 2.25rem; }
+  .md\:text-xl { font-size: 1.25rem; }
+  .md\:text-sm { font-size: 0.875rem; }
+  .md\:flex-row { flex-direction: row; }
 }
 
 .gap-1 { gap: 0.25rem; }
